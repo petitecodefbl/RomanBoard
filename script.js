@@ -107,10 +107,64 @@ function afficherPersonnages() {
       ${personnage.apparence || "Non renseignée"}</p>
 
       <p><strong>Personnalité :</strong><br>
-      ${personnage.personnalite || "Non renseignée"}</p>
+ function afficherPersonnages() {
 
-      <p><strong>Notes :</strong><br>
-      ${personnage.notes || "Aucune note"}</p>
+  listePersonnages.innerHTML = "";
+
+  listeDesPersonnages.forEach(function(personnage, index) {
+
+    const carte = document.createElement("div");
+
+    carte.classList.add("carte-personnage");
+
+    carte.innerHTML = `
+      <h3>${personnage.nom}</h3>
+
+      <p>
+        <strong>Âge :</strong>
+        ${personnage.age || "Non renseigné"}
+      </p>
+
+      <p>
+        <strong>Genre :</strong>
+        ${personnage.genre || "Non renseigné"}
+      </p>
+
+      <p>
+        <strong>Rôle :</strong>
+        ${personnage.role || "Non renseigné"}
+      </p>
+
+      <p>
+        <strong>Apparence :</strong><br>
+        ${personnage.apparence || "Non renseignée"}
+      </p>
+
+      <p>
+        <strong>Personnalité :</strong><br>
+        ${personnage.personnalite || "Non renseignée"}
+      </p>
+
+      <p>
+        <strong>Notes :</strong><br>
+        ${personnage.notes || "Aucune note"}
+      </p>
+
+      <div class="actions-personnage">
+
+        <button
+          class="modifier-personnage"
+          data-index="${index}">
+          ✏️ Modifier
+        </button>
+
+        <button
+          class="supprimer-personnage"
+          data-index="${index}">
+          🗑️ Supprimer
+        </button>
+
+      </div>
     `;
 
     listePersonnages.appendChild(carte);

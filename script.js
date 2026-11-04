@@ -3,11 +3,6 @@
 // ========================================
 
 const btnDashboard = document.getElementById("btn-dashboard");
-const btnPersonnages = document.getElementByIda// ========================================
-// MENU
-// ========================================
-
-const btnDashboard = document.getElementById("btn-dashboard");
 const btnPersonnages = document.getElementById("btn-personnages");
 const btnRelations = document.getElementById("btn-relations");
 const btnChronologie = document.getElementById("btn-chronologie");

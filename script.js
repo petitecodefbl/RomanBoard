@@ -574,7 +574,8 @@ boutonEnregistrerRelation.addEventListener("click", function() {
 
   sauvegarderRelations();
 
-  afficherRelations();
+afficherRelations();
+dessinerCarteRelations();
 
 
   formulaireRelation.style.display = "none";
@@ -668,7 +669,8 @@ listeRelationsHTML.addEventListener("click", function(event) {
 
       sauvegarderRelations();
 
-      afficherRelations();
+afficherRelations();
+dessinerCarteRelations();
 
     }
 
@@ -697,3 +699,243 @@ function sauvegarderRelations() {
 
 afficherRelations();
 
+// ========================================
+// CARTE VISUELLE DES RELATIONS
+// ========================================
+
+const carteRelations =
+  document.getElementById("carte-relations");
+
+const bullesPersonnages =
+  document.getElementById("bulles-personnages");
+
+const lignesRelations =
+  document.getElementById("lignes-relations");
+
+
+// ========================================
+// DESSINER LA CARTE
+// ========================================
+
+function dessinerCarteRelations() {
+
+  bullesPersonnages.innerHTML = "";
+  lignesRelations.innerHTML = "";
+
+
+  const nombrePersonnages =
+    listeDesPersonnages.length;
+
+
+  if (nombrePersonnages === 0) {
+    return;
+  }
+
+
+  const largeur =
+    carteRelations.clientWidth;
+
+  const hauteur =
+    carteRelations.clientHeight;
+
+
+  const centreX =
+    largeur / 2;
+
+  const centreY =
+    hauteur / 2;
+
+
+  // Distance des personnages par rapport au centre
+
+  const rayon =
+    Math.min(largeur, hauteur) * 0.32;
+
+
+  const positions = [];
+
+
+  // ========================================
+  // CRÉATION DES BULLES
+  // ========================================
+
+  listeDesPersonnages.forEach(function(personnage, index) {
+
+    const angle =
+      (index / nombrePersonnages) *
+      Math.PI *
+      2 -
+      Math.PI / 2;
+
+
+    const x =
+      centreX +
+      Math.cos(angle) * rayon;
+
+    const y =
+      centreY +
+      Math.sin(angle) * rayon;
+
+
+    positions.push({
+      nom: personnage.nom,
+      x: x,
+      y: y
+    });
+
+
+    const bulle =
+      document.createElement("div");
+
+
+    bulle.classList.add(
+      "bulle-personnage"
+    );
+
+
+    bulle.textContent =
+      personnage.nom;
+
+
+    bulle.style.left =
+      (x - 55) + "px";
+
+    bulle.style.top =
+      (y - 55) + "px";
+
+
+    bullesPersonnages.appendChild(
+      bulle
+    );
+
+  });
+
+
+  // ========================================
+  // CRÉATION DES RELATIONS
+  // ========================================
+
+  listeDesRelations.forEach(function(relation) {
+
+    const position1 =
+      positions.find(function(position) {
+        return position.nom === relation.personnage1;
+      });
+
+
+    const position2 =
+      positions.find(function(position) {
+        return position.nom === relation.personnage2;
+      });
+
+
+    if (!position1 || !position2) {
+      return;
+    }
+
+
+    // Ligne
+
+    const ligne =
+      document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "line"
+      );
+
+
+    ligne.setAttribute(
+      "x1",
+      position1.x
+    );
+
+    ligne.setAttribute(
+      "y1",
+      position1.y
+    );
+
+    ligne.setAttribute(
+      "x2",
+      position2.x
+    );
+
+    ligne.setAttribute(
+      "y2",
+      position2.y
+    );
+
+
+    ligne.setAttribute(
+      "stroke",
+      "#777"
+    );
+
+    ligne.setAttribute(
+      "stroke-width",
+      "3"
+    );
+
+
+    lignesRelations.appendChild(
+      ligne
+    );
+
+
+    // ========================================
+    // NOM DE LA RELATION
+    // ========================================
+
+    const texte =
+      document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "text"
+      );
+
+
+    const milieuX =
+      (position1.x + position2.x) / 2;
+
+    const milieuY =
+      (position1.y + position2.y) / 2;
+
+
+    texte.setAttribute(
+      "x",
+      milieuX
+    );
+
+    texte.setAttribute(
+      "y",
+      milieuY - 8
+    );
+
+
+    texte.setAttribute(
+      "text-anchor",
+      "middle"
+    );
+
+
+    texte.setAttribute(
+      "class",
+      "texte-relation"
+    );
+
+
+    texte.textContent =
+      relation.type;
+
+
+    lignesRelations.appendChild(
+      texte
+    );
+
+  });
+
+}
+
+
+// ========================================
+// PREMIER AFFICHAGE
+// ========================================
+
+dessinerCarteRelations();

@@ -419,3 +419,281 @@ function viderFormulaire() {
 // ========================================
 
 afficherPersonnages();("btn-personnages");
+
+// ========================================
+// RELATIONS
+// ========================================
+
+const boutonAjouterRelation =
+  document.getElementById("ajouter-relation");
+
+const formulaireRelation =
+  document.getElementById("formulaire-relation");
+
+const selectPersonnage1 =
+  document.getElementById("personnage-1");
+
+const selectPersonnage2 =
+  document.getElementById("personnage-2");
+
+const selectTypeRelation =
+  document.getElementById("type-relation");
+
+const descriptionRelation =
+  document.getElementById("description-relation");
+
+const boutonEnregistrerRelation =
+  document.getElementById("enregistrer-relation");
+
+const boutonAnnulerRelation =
+  document.getElementById("annuler-relation");
+
+const listeRelationsHTML =
+  document.getElementById("liste-relations");
+
+
+// ========================================
+// CHARGEMENT DES RELATIONS
+// ========================================
+
+let listeDesRelations =
+  JSON.parse(localStorage.getItem("relations")) || [];
+
+
+// ========================================
+// REMPLIR LES LISTES DE PERSONNAGES
+// ========================================
+
+function remplirSelectPersonnages() {
+
+  selectPersonnage1.innerHTML = "";
+  selectPersonnage2.innerHTML = "";
+
+  listeDesPersonnages.forEach(function(personnage, index) {
+
+    const option1 = document.createElement("option");
+    option1.value = index;
+    option1.textContent = personnage.nom;
+
+    const option2 = document.createElement("option");
+    option2.value = index;
+    option2.textContent = personnage.nom;
+
+    selectPersonnage1.appendChild(option1);
+    selectPersonnage2.appendChild(option2);
+
+  });
+
+}
+
+
+// ========================================
+// OUVRIR LE FORMULAIRE
+// ========================================
+
+boutonAjouterRelation.addEventListener("click", function() {
+
+  remplirSelectPersonnages();
+
+  if (listeDesPersonnages.length < 2) {
+
+    alert(
+      "Il faut créer au moins deux personnages avant d'ajouter une relation."
+    );
+
+    return;
+
+  }
+
+  formulaireRelation.style.display = "block";
+
+});
+
+
+// ========================================
+// ANNULER
+// ========================================
+
+boutonAnnulerRelation.addEventListener("click", function() {
+
+  formulaireRelation.style.display = "none";
+
+  descriptionRelation.value = "";
+
+});
+
+
+// ========================================
+// ENREGISTRER UNE RELATION
+// ========================================
+
+boutonEnregistrerRelation.addEventListener("click", function() {
+
+  const indexPersonnage1 =
+    Number(selectPersonnage1.value);
+
+  const indexPersonnage2 =
+    Number(selectPersonnage2.value);
+
+
+  // Empêche de relier un personnage à lui-même
+
+  if (indexPersonnage1 === indexPersonnage2) {
+
+    alert(
+      "Choisis deux personnages différents."
+    );
+
+    return;
+
+  }
+
+
+  const personnage1 =
+    listeDesPersonnages[indexPersonnage1];
+
+  const personnage2 =
+    listeDesPersonnages[indexPersonnage2];
+
+
+  const nouvelleRelation = {
+
+    personnage1: personnage1.nom,
+
+    personnage2: personnage2.nom,
+
+    type: selectTypeRelation.value,
+
+    description: descriptionRelation.value.trim()
+
+  };
+
+
+  listeDesRelations.push(nouvelleRelation);
+
+
+  sauvegarderRelations();
+
+  afficherRelations();
+
+
+  formulaireRelation.style.display = "none";
+
+  descriptionRelation.value = "";
+
+});
+
+
+// ========================================
+// AFFICHER LES RELATIONS
+// ========================================
+
+function afficherRelations() {
+
+  listeRelationsHTML.innerHTML = "";
+
+
+  if (listeDesRelations.length === 0) {
+
+    listeRelationsHTML.innerHTML =
+      "<p>Aucune relation enregistrée pour le moment.</p>";
+
+    return;
+
+  }
+
+
+  listeDesRelations.forEach(function(relation, index) {
+
+    const carteRelation =
+      document.createElement("div");
+
+    carteRelation.classList.add("carte-relation");
+
+
+    carteRelation.innerHTML = `
+      <h3>
+        ${relation.personnage1}
+        ↔
+        ${relation.personnage2}
+      </h3>
+
+      <p>
+        <strong>${relation.type}</strong>
+      </p>
+
+      ${
+        relation.description
+          ? `<p>${relation.description}</p>`
+          : ""
+      }
+
+      <button
+        class="supprimer-relation"
+        data-relation-index="${index}">
+        🗑️ Supprimer
+      </button>
+    `;
+
+
+    listeRelationsHTML.appendChild(carteRelation);
+
+  });
+
+}
+
+
+// ========================================
+// SUPPRIMER UNE RELATION
+// ========================================
+
+listeRelationsHTML.addEventListener("click", function(event) {
+
+  if (
+    event.target.classList.contains("supprimer-relation")
+  ) {
+
+    const index =
+      Number(event.target.dataset.relationIndex);
+
+
+    const confirmation = confirm(
+      "Supprimer cette relation ?"
+    );
+
+
+    if (confirmation) {
+
+      listeDesRelations.splice(index, 1);
+
+      sauvegarderRelations();
+
+      afficherRelations();
+
+    }
+
+  }
+
+});
+
+
+// ========================================
+// SAUVEGARDE DES RELATIONS
+// ========================================
+
+function sauvegarderRelations() {
+
+  localStorage.setItem(
+    "relations",
+    JSON.stringify(listeDesRelations)
+  );
+
+}
+
+
+// ========================================
+// AFFICHAGE AU DÉMARRAGE
+// ========================================
+
+afficherRelations();
+

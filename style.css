@@ -284,3 +284,116 @@ section h2 {
   color: #a00000;
 }
 
+/* ========================================
+   RELATIONS
+======================================== */
+
+#formulaire-relation {
+  display: none;
+
+  margin-top: 25px;
+  padding: 25px;
+
+  background-color: #f4f1ec;
+
+  border-radius: 12px;
+}
+
+
+#formulaire-relation label {
+  display: block;
+
+  margin-top: 15px;
+  margin-bottom: 5px;
+
+  font-weight: bold;
+}
+
+
+#formulaire-relation select,
+#formulaire-relation textarea {
+  width: 100%;
+
+  padding: 10px;
+
+  border: 1px solid #cccccc;
+  border-radius: 7px;
+
+  font-family: inherit;
+  font-size: 15px;
+}
+
+
+#formulaire-relation textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+
+#ajouter-relation,
+#enregistrer-relation {
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: #252525;
+  color: white;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+
+#annuler-relation {
+  padding: 12px 20px;
+
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+
+  background-color: white;
+
+  cursor: pointer;
+}
+
+
+/* LISTE DES RELATIONS */
+
+#liste-relations {
+  margin-top: 30px;
+
+  display: grid;
+
+  gap: 15px;
+}
+
+
+.carte-relation {
+  padding: 20px;
+
+  border: 1px solid #dddddd;
+  border-radius: 12px;
+
+  background-color: white;
+}
+
+
+.carte-relation h3 {
+  margin-top: 0;
+}
+
+
+.supprimer-relation {
+  padding: 8px 12px;
+
+  border: none;
+  border-radius: 7px;
+
+  background-color: #ffe5e5;
+  color: #a00000;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}

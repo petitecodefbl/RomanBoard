@@ -142,15 +142,98 @@
 
     <!-- RELATIONS -->
 
-    <section id="relations">
+   <section id="relations">
 
-      <h2>🕸️ Relations</h2>
+  <h2>🕸️ Relations</h2>
 
-      <p>
-        La carte des relations apparaîtra ici.
-      </p>
+  <button id="ajouter-relation">
+    + Ajouter une relation
+  </button>
 
-    </section>
+
+  <!-- FORMULAIRE RELATION -->
+
+  <div id="formulaire-relation">
+
+    <h3>Nouvelle relation</h3>
+
+    <label for="personnage-1">
+      Premier personnage
+    </label>
+
+    <select id="personnage-1"></select>
+
+
+    <label for="type-relation">
+      Type de relation
+    </label>
+
+    <select id="type-relation">
+
+      <option value="❤️ Amour">
+        ❤️ Amour
+      </option>
+
+      <option value="🤝 Amitié">
+        🤝 Amitié
+      </option>
+
+      <option value="👨‍👩‍👧 Famille">
+        👨‍👩‍👧 Famille
+      </option>
+
+      <option value="⚔️ Ennemi">
+        ⚔️ Ennemi
+      </option>
+
+      <option value="💼 Collègue">
+        💼 Collègue
+      </option>
+
+      <option value="❓ Autre">
+        ❓ Autre
+      </option>
+
+    </select>
+
+
+    <label for="personnage-2">
+      Deuxième personnage
+    </label>
+
+    <select id="personnage-2"></select>
+
+
+    <label for="description-relation">
+      Détails
+    </label>
+
+    <textarea
+      id="description-relation"
+      placeholder="Ex : amis d'enfance, relation secrète..."
+    ></textarea>
+
+
+    <div class="actions-formulaire">
+
+      <button id="enregistrer-relation">
+        💾 Enregistrer
+      </button>
+
+      <button id="annuler-relation">
+        Annuler
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- RELATIONS ENREGISTRÉES -->
+
+  <div id="liste-relations"></div>
+
+</section>
 
 
     <!-- CHRONOLOGIE -->

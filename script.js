@@ -1,4 +1,6 @@
-// ===== BOUTONS DU MENU =====
+// ========================================
+// MENU
+// ========================================
 
 const btnDashboard = document.getElementById("btn-dashboard");
 const btnPersonnages = document.getElementById("btn-personnages");
@@ -6,7 +8,9 @@ const btnRelations = document.getElementById("btn-relations");
 const btnChronologie = document.getElementById("btn-chronologie");
 
 
-// ===== SECTIONS =====
+// ========================================
+// SECTIONS
+// ========================================
 
 const dashboard = document.getElementById("dashboard");
 const personnages = document.getElementById("personnages");
@@ -14,22 +18,20 @@ const relations = document.getElementById("relations");
 const chronologie = document.getElementById("chronologie");
 
 
-// ===== FONCTION POUR CHANGER DE PAGE =====
-
 function afficherSection(section) {
 
-  // On cache tout
   dashboard.style.display = "none";
   personnages.style.display = "none";
   relations.style.display = "none";
   chronologie.style.display = "none";
 
-  // Puis on affiche seulement la section demandée
   section.style.display = "block";
 }
 
 
-// ===== CLICS SUR LE MENU =====
+// ========================================
+// NAVIGATION
+// ========================================
 
 btnDashboard.addEventListener("click", function() {
   afficherSection(dashboard);
@@ -48,11 +50,14 @@ btnChronologie.addEventListener("click", function() {
 });
 
 
-// ===== PAGE AFFICHÉE AU DÉMARRAGE =====
+// Page affichée au démarrage
 
 afficherSection(dashboard);
 
-// ===== PERSONNAGES =====
+
+// ========================================
+// PERSONNAGES
+// ========================================
 
 const boutonAjouterPersonnage =
   document.getElementById("ajouter-personnage");
@@ -68,6 +73,12 @@ const boutonAnnulerPersonnage =
 
 const listePersonnages =
   document.getElementById("liste-personnages");
+
+
+// ========================================
+// OUVRIR / FERMER LE FORMULAIRE
+// ========================================
+
 boutonAjouterPersonnage.addEventListener("click", function() {
 
   formulairePersonnage.style.display = "block";
@@ -81,33 +92,20 @@ boutonAnnulerPersonnage.addEventListener("click", function() {
 
 });
 
+
+// ========================================
+// CHARGEMENT DES PERSONNAGES
+// ========================================
+
 let listeDesPersonnages =
   JSON.parse(localStorage.getItem("personnages")) || [];
 
+
+// ========================================
+// AFFICHER LES PERSONNAGES
+// ========================================
+
 function afficherPersonnages() {
-
-  listePersonnages.innerHTML = "";
-
-  listeDesPersonnages.forEach(function(personnage) {
-
-    const carte = document.createElement("div");
-
-    carte.classList.add("carte-personnage");
-
-    carte.innerHTML = `
-      <h3>${personnage.nom}</h3>
-
-      <p><strong>Âge :</strong> ${personnage.age || "Non renseigné"}</p>
-
-      <p><strong>Genre :</strong> ${personnage.genre || "Non renseigné"}</p>
-
-      <p><strong>Rôle :</strong> ${personnage.role || "Non renseigné"}</p>
-
-      <p><strong>Apparence :</strong><br>
-      ${personnage.apparence || "Non renseignée"}</p>
-
-      <p><strong>Personnalité :</strong><br>
- function afficherPersonnages() {
 
   listePersonnages.innerHTML = "";
 
@@ -173,6 +171,11 @@ function afficherPersonnages() {
 
 }
 
+
+// ========================================
+// ENREGISTRER UN PERSONNAGE
+// ========================================
+
 boutonEnregistrerPersonnage.addEventListener("click", function() {
 
   const nom =
@@ -200,14 +203,15 @@ boutonEnregistrerPersonnage.addEventListener("click", function() {
   // Le nom est obligatoire
 
   if (nom === "") {
+
     alert("Donne au moins un nom à ton personnage.");
+
     return;
   }
 
 
-  // Création du personnage
-
   const nouveauPersonnage = {
+
     nom: nom,
     age: age,
     genre: genre,
@@ -215,33 +219,93 @@ boutonEnregistrerPersonnage.addEventListener("click", function() {
     apparence: apparence,
     personnalite: personnalite,
     notes: notes
+
   };
 
 
-  // Ajout dans notre liste
+  // Ajout du personnage
 
   listeDesPersonnages.push(nouveauPersonnage);
 
 
-  // Sauvegarde dans le navigateur
+  // Sauvegarde
+
+  sauvegarderPersonnages();
+
+
+  // Actualisation
+
+  afficherPersonnages();
+
+
+  // Ferme le formulaire
+
+  formulairePersonnage.style.display = "none";
+
+
+  // Vide le formulaire
+
+  viderFormulaire();
+
+});
+
+
+// ========================================
+// SUPPRIMER UN PERSONNAGE
+// ========================================
+
+listePersonnages.addEventListener("click", function(event) {
+
+  if (
+    event.target.classList.contains("supprimer-personnage")
+  ) {
+
+    const index =
+      Number(event.target.dataset.index);
+
+    const personnage =
+      listeDesPersonnages[index];
+
+
+    const confirmation = confirm(
+      "Supprimer " + personnage.nom + " ?"
+    );
+
+
+    if (confirmation) {
+
+      listeDesPersonnages.splice(index, 1);
+
+      sauvegarderPersonnages();
+
+      afficherPersonnages();
+
+    }
+
+  }
+
+});
+
+
+// ========================================
+// SAUVEGARDE
+// ========================================
+
+function sauvegarderPersonnages() {
 
   localStorage.setItem(
     "personnages",
     JSON.stringify(listeDesPersonnages)
   );
 
-
-  // Actualisation de l'affichage
-
-  afficherPersonnages();
+}
 
 
-  // Cache le formulaire
+// ========================================
+// VIDER LE FORMULAIRE
+// ========================================
 
-  formulairePersonnage.style.display = "none";
-
-
-  // Vide les champs
+function viderFormulaire() {
 
   document.getElementById("nom-personnage").value = "";
   document.getElementById("age-personnage").value = "";
@@ -251,6 +315,11 @@ boutonEnregistrerPersonnage.addEventListener("click", function() {
   document.getElementById("personnalite-personnage").value = "";
   document.getElementById("notes-personnage").value = "";
 
-});
+}
+
+
+// ========================================
+// AFFICHAGE AU CHARGEMENT
+// ========================================
 
 afficherPersonnages();

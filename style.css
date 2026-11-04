@@ -148,3 +148,109 @@ section h2 {
     padding: 20px;
   }
 }
+
+/* ===== FORMULAIRE PERSONNAGE ===== */
+
+#formulaire-personnage {
+  display: none;
+
+  margin-top: 25px;
+  padding: 25px;
+
+  background-color: #f4f1ec;
+
+  border-radius: 12px;
+}
+
+#formulaire-personnage h3 {
+  margin-top: 0;
+}
+
+#formulaire-personnage label {
+  display: block;
+
+  margin-top: 15px;
+  margin-bottom: 5px;
+
+  font-weight: bold;
+}
+
+#formulaire-personnage input,
+#formulaire-personnage select,
+#formulaire-personnage textarea {
+  width: 100%;
+
+  padding: 10px;
+
+  border: 1px solid #cccccc;
+  border-radius: 7px;
+
+  font-family: inherit;
+  font-size: 15px;
+}
+
+#formulaire-personnage textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+
+/* ===== BOUTONS DU FORMULAIRE ===== */
+
+.actions-formulaire {
+  display: flex;
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+#enregistrer-personnage {
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: #252525;
+  color: white;
+
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#annuler-personnage {
+  padding: 12px 20px;
+
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+
+  background-color: white;
+
+  cursor: pointer;
+}
+
+
+/* ===== LISTE DES PERSONNAGES ===== */
+
+#liste-personnages {
+  margin-top: 30px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 15px;
+}
+
+.carte-personnage {
+  padding: 20px;
+
+  border: 1px solid #dddddd;
+  border-radius: 12px;
+
+  background-color: white;
+}
+
+.carte-personnage h3 {
+  margin-top: 0;
+}

@@ -1,1 +1,150 @@
+/* ===== BASE ===== */
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+
+  background-color: #f4f1ec;
+  color: #292929;
+}
+
+
+/* ===== EN-TÊTE ===== */
+
+header {
+  background-color: #252525;
+  color: white;
+
+  padding: 25px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+header p {
+  margin: 8px 0 0;
+  color: #cccccc;
+}
+
+
+/* ===== MENU ===== */
+
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  padding: 15px;
+
+  background-color: white;
+
+  border-bottom: 1px solid #dddddd;
+}
+
+nav button {
+  padding: 12px 18px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: #eeeeee;
+
+  font-size: 15px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+nav button:hover {
+  background-color: #252525;
+  color: white;
+}
+
+
+/* ===== CONTENU ===== */
+
+main {
+  max-width: 1000px;
+
+  margin: 40px auto;
+
+  padding: 0 20px;
+}
+
+section {
+  background-color: white;
+
+  padding: 30px;
+
+  border-radius: 15px;
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+
+  margin-bottom: 25px;
+}
+
+section h2 {
+  margin-top: 0;
+}
+
+
+/* ===== BOUTONS ===== */
+
+#ajouter-personnage,
+#ajouter-evenement {
+
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: #252525;
+  color: white;
+
+  font-size: 15px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+#ajouter-personnage:hover,
+#ajouter-evenement:hover {
+  transform: scale(1.03);
+}
+
+
+/* ===== VERSION TÉLÉPHONE ===== */
+
+@media (max-width: 600px) {
+
+  header h1 {
+    font-size: 26px;
+  }
+
+  nav {
+    flex-direction: column;
+  }
+
+  nav button {
+    width: 100%;
+  }
+
+  main {
+    margin-top: 20px;
+  }
+
+  section {
+    padding: 20px;
+  }
+}

@@ -1,3 +1,5 @@
+alert("JavaScript fonctionne !");
+
 // ===== BOUTONS DU MENU =====
 
 const btnDashboard = document.getElementById("btn-dashboard");

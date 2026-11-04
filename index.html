@@ -58,15 +58,86 @@
 
     <!-- PERSONNAGES -->
 
-    <section id="personnages">
+<section id="personnages">
 
-      <h2>👤 Personnages</h2>
+  <h2>👤 Personnages</h2>
 
-      <button id="ajouter-personnage">
-        + Ajouter un personnage
+  <button id="ajouter-personnage">
+    + Ajouter un personnage
+  </button>
+
+  <!-- FORMULAIRE -->
+
+  <div id="formulaire-personnage">
+
+    <h3>Nouveau personnage</h3>
+
+    <label for="nom-personnage">Nom</label>
+    <input
+      type="text"
+      id="nom-personnage"
+      placeholder="Ex : Emma"
+    >
+
+    <label for="age-personnage">Âge</label>
+    <input
+      type="number"
+      id="age-personnage"
+      placeholder="Ex : 27"
+    >
+
+    <label for="genre-personnage">Genre</label>
+    <select id="genre-personnage">
+      <option value="">Non renseigné</option>
+      <option value="Femme">Femme</option>
+      <option value="Homme">Homme</option>
+      <option value="Non-binaire">Non-binaire</option>
+      <option value="Autre">Autre</option>
+    </select>
+
+    <label for="role-personnage">Rôle dans l'histoire</label>
+    <input
+      type="text"
+      id="role-personnage"
+      placeholder="Ex : Personnage principal"
+    >
+
+    <label for="apparence-personnage">Apparence</label>
+    <textarea
+      id="apparence-personnage"
+      placeholder="Cheveux, yeux, vêtements, signes particuliers..."
+    ></textarea>
+
+    <label for="personnalite-personnage">Personnalité</label>
+    <textarea
+      id="personnalite-personnage"
+      placeholder="Qualités, défauts, peurs, habitudes..."
+    ></textarea>
+
+    <label for="notes-personnage">Notes</label>
+    <textarea
+      id="notes-personnage"
+      placeholder="Secrets, passé, idées..."
+    ></textarea>
+
+    <div class="actions-formulaire">
+      <button id="enregistrer-personnage">
+        💾 Enregistrer
       </button>
 
-    </section>
+      <button id="annuler-personnage">
+        Annuler
+      </button>
+    </div>
+
+  </div>
+
+
+  <!-- LES PERSONNAGES APPARAÎTRONT ICI -->
+
+  <div id="liste-personnages"></div>
+
+</section>
 
 
     <!-- RELATIONS -->

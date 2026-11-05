@@ -42,7 +42,11 @@ btnPersonnages.addEventListener("click", function() {
 });
 
 btnRelations.addEventListener("click", function() {
+
   afficherSection(relations);
+
+  dessinerCarteRelations();
+
 });
 
 btnChronologie.addEventListener("click", function() {
@@ -418,7 +422,7 @@ function viderFormulaire() {
 // AFFICHAGE AU DÉMARRAGE
 // ========================================
 
-afficherPersonnages();("btn-personnages");
+afficherPersonnages();
 
 // ========================================
 // RELATIONS
@@ -934,8 +938,3 @@ function dessinerCarteRelations() {
 }
 
 
-// ========================================
-// PREMIER AFFICHAGE
-// ========================================
-
-dessinerCarteRelations();

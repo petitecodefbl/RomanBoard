@@ -821,14 +821,26 @@ bulle.addEventListener("click", function() {
     cartes[index];
 
   // Descend jusqu'à la bonne fiche
-  if (carte) {
+if (carte) {
 
-    carte.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
+  carte.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
 
-  }
+  carte.classList.remove("surlignee");
+
+  // Relance l'animation même si on clique
+  // plusieurs fois sur le même personnage
+  void carte.offsetWidth;
+
+  carte.classList.add("surlignee");
+
+  setTimeout(function() {
+    carte.classList.remove("surlignee");
+  }, 1800);
+
+}
 
 });
     

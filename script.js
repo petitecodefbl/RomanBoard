@@ -973,4 +973,402 @@ if (carte) {
 
 }
 
+// ========================================
+// CHRONOLOGIE
+// ========================================
 
+const boutonAjouterEvenement =
+  document.getElementById("ajouter-evenement");
+
+const formulaireEvenement =
+  document.getElementById("formulaire-evenement");
+
+const titreEvenement =
+  document.getElementById("titre-evenement");
+
+const dateEvenement =
+  document.getElementById("date-evenement");
+
+const chapitreEvenement =
+  document.getElementById("chapitre-evenement");
+
+const lieuEvenement =
+  document.getElementById("lieu-evenement");
+
+const personnagesEvenement =
+  document.getElementById("personnages-evenement");
+
+const descriptionEvenement =
+  document.getElementById("description-evenement");
+
+const boutonEnregistrerEvenement =
+  document.getElementById("enregistrer-evenement");
+
+const boutonAnnulerEvenement =
+  document.getElementById("annuler-evenement");
+
+const listeEvenementsHTML =
+  document.getElementById("liste-evenements");
+
+
+// ========================================
+// DONNÉES CHRONOLOGIE
+// ========================================
+
+let listeDesEvenements =
+  JSON.parse(localStorage.getItem("evenements")) || [];
+
+let evenementEnModification = null;
+
+
+// ========================================
+// REMPLIR LES PERSONNAGES
+// ========================================
+
+function remplirPersonnagesEvenement() {
+
+  personnagesEvenement.innerHTML = "";
+
+  listeDesPersonnages.forEach(function(personnage, index) {
+
+    const option = document.createElement("option");
+
+    option.value = index;
+    option.textContent = personnage.nom;
+
+    personnagesEvenement.appendChild(option);
+
+  });
+
+}
+
+
+// ========================================
+// AJOUTER UN ÉVÉNEMENT
+// ========================================
+
+boutonAjouterEvenement.addEventListener("click", function() {
+
+  evenementEnModification = null;
+
+  viderFormulaireEvenement();
+
+  remplirPersonnagesEvenement();
+
+  formulaireEvenement.style.display = "block";
+
+});
+
+
+// ========================================
+// ANNULER
+// ========================================
+
+boutonAnnulerEvenement.addEventListener("click", function() {
+
+  formulaireEvenement.style.display = "none";
+
+  evenementEnModification = null;
+
+  viderFormulaireEvenement();
+
+});
+
+
+// ========================================
+// ENREGISTRER
+// ========================================
+
+boutonEnregistrerEvenement.addEventListener("click", function() {
+
+  const titre = titreEvenement.value.trim();
+
+  if (titre === "") {
+
+    alert("Donne un titre à ton événement.");
+
+    return;
+
+  }
+
+
+  const personnagesSelectionnes =
+    Array.from(personnagesEvenement.selectedOptions)
+      .map(function(option) {
+
+        const index = Number(option.value);
+
+        return listeDesPersonnages[index].nom;
+
+      });
+
+
+  const nouvelEvenement = {
+
+    titre: titre,
+
+    date: dateEvenement.value.trim(),
+
+    chapitre: chapitreEvenement.value.trim(),
+
+    lieu: lieuEvenement.value.trim(),
+
+    personnages: personnagesSelectionnes,
+
+    description: descriptionEvenement.value.trim()
+
+  };
+
+
+  // AJOUT OU MODIFICATION
+
+  if (evenementEnModification === null) {
+
+    listeDesEvenements.push(nouvelEvenement);
+
+  } else {
+
+    listeDesEvenements[evenementEnModification] =
+      nouvelEvenement;
+
+    evenementEnModification = null;
+
+  }
+
+
+  sauvegarderEvenements();
+
+  afficherEvenements();
+
+  formulaireEvenement.style.display = "none";
+
+  viderFormulaireEvenement();
+
+});
+
+
+// ========================================
+// AFFICHER LES ÉVÉNEMENTS
+// ========================================
+
+function afficherEvenements() {
+
+  listeEvenementsHTML.innerHTML = "";
+
+
+  if (listeDesEvenements.length === 0) {
+
+    listeEvenementsHTML.innerHTML =
+      "<p>Aucun événement enregistré pour le moment.</p>";
+
+    return;
+
+  }
+
+
+  listeDesEvenements.forEach(function(evenement, index) {
+
+    const carte = document.createElement("div");
+
+    carte.classList.add("carte-evenement");
+
+
+    const personnagesTexte =
+      evenement.personnages &&
+      evenement.personnages.length > 0
+        ? evenement.personnages.join(", ")
+        : "Aucun";
+
+
+    carte.innerHTML = `
+
+      <h3>${evenement.titre}</h3>
+
+      <p>
+        <strong>🕐 Date / période :</strong>
+        ${evenement.date || "Non renseignée"}
+      </p>
+
+      <p>
+        <strong>📖 Chapitre :</strong>
+        ${evenement.chapitre || "Non renseigné"}
+      </p>
+
+      <p>
+        <strong>📍 Lieu :</strong>
+        ${evenement.lieu || "Non renseigné"}
+      </p>
+
+      <p>
+        <strong>👤 Personnages :</strong>
+        ${personnagesTexte}
+      </p>
+
+      <p>
+        <strong>Description :</strong><br>
+        ${evenement.description || "Aucune description"}
+      </p>
+
+
+      <div class="actions-evenement">
+
+        <button
+          class="modifier-evenement"
+          data-evenement-index="${index}">
+          ✏️ Modifier
+        </button>
+
+        <button
+          class="supprimer-evenement"
+          data-evenement-index="${index}">
+          🗑️ Supprimer
+        </button>
+
+      </div>
+
+    `;
+
+
+    listeEvenementsHTML.appendChild(carte);
+
+  });
+
+}
+
+
+// ========================================
+// MODIFIER / SUPPRIMER
+// ========================================
+
+listeEvenementsHTML.addEventListener("click", function(event) {
+
+
+  // MODIFIER
+
+  if (
+    event.target.classList.contains("modifier-evenement")
+  ) {
+
+    const index =
+      Number(event.target.dataset.evenementIndex);
+
+    const evenement =
+      listeDesEvenements[index];
+
+    evenementEnModification = index;
+
+    remplirPersonnagesEvenement();
+
+
+    titreEvenement.value =
+      evenement.titre || "";
+
+    dateEvenement.value =
+      evenement.date || "";
+
+    chapitreEvenement.value =
+      evenement.chapitre || "";
+
+    lieuEvenement.value =
+      evenement.lieu || "";
+
+    descriptionEvenement.value =
+      evenement.description || "";
+
+
+    Array.from(personnagesEvenement.options)
+      .forEach(function(option) {
+
+        const personnage =
+          listeDesPersonnages[Number(option.value)];
+
+        option.selected =
+          evenement.personnages.includes(personnage.nom);
+
+      });
+
+
+    formulaireEvenement.style.display = "block";
+
+    formulaireEvenement.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  }
+
+
+  // SUPPRIMER
+
+  if (
+    event.target.classList.contains("supprimer-evenement")
+  ) {
+
+    const index =
+      Number(event.target.dataset.evenementIndex);
+
+    const evenement =
+      listeDesEvenements[index];
+
+
+    const confirmation = confirm(
+      "Supprimer l'événement « " +
+      evenement.titre +
+      " » ?"
+    );
+
+
+    if (confirmation) {
+
+      listeDesEvenements.splice(index, 1);
+
+      sauvegarderEvenements();
+
+      afficherEvenements();
+
+    }
+
+  }
+
+});
+
+
+// ========================================
+// SAUVEGARDE
+// ========================================
+
+function sauvegarderEvenements() {
+
+  localStorage.setItem(
+    "evenements",
+    JSON.stringify(listeDesEvenements)
+  );
+
+}
+
+
+// ========================================
+// VIDER LE FORMULAIRE
+// ========================================
+
+function viderFormulaireEvenement() {
+
+  titreEvenement.value = "";
+  dateEvenement.value = "";
+  chapitreEvenement.value = "";
+  lieuEvenement.value = "";
+  descriptionEvenement.value = "";
+
+  Array.from(personnagesEvenement.options)
+    .forEach(function(option) {
+      option.selected = false;
+    });
+
+}
+
+
+// ========================================
+// AFFICHAGE INITIAL
+// ========================================
+
+afficherEvenements();

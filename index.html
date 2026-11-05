@@ -254,17 +254,113 @@
 
 </section>
 
-    <!-- CHRONOLOGIE -->
+ 
+<!-- CHRONOLOGIE -->
 
-    <section id="chronologie">
+<section id="chronologie">
 
-      <h2>🕐 Chronologie</h2>
+  <h2>🕐 Chronologie</h2>
 
-      <button id="ajouter-evenement">
-        + Ajouter un événement
+  <button id="ajouter-evenement">
+    + Ajouter un événement
+  </button>
+
+
+  <!-- FORMULAIRE ÉVÉNEMENT -->
+
+  <div id="formulaire-evenement">
+
+    <h3>Nouvel événement</h3>
+
+    <label for="titre-evenement">
+      Titre
+    </label>
+
+    <input
+      type="text"
+      id="titre-evenement"
+      placeholder="Ex : Rencontre entre Inaya et Lucas"
+    >
+
+
+    <label for="date-evenement">
+      Date ou période dans l'histoire
+    </label>
+
+    <input
+      type="text"
+      id="date-evenement"
+      placeholder="Ex : 15 juillet, Été, Jour 3..."
+    >
+
+
+    <label for="chapitre-evenement">
+      Chapitre
+    </label>
+
+    <input
+      type="text"
+      id="chapitre-evenement"
+      placeholder="Ex : Chapitre 7"
+    >
+
+
+    <label for="lieu-evenement">
+      Lieu
+    </label>
+
+    <input
+      type="text"
+      id="lieu-evenement"
+      placeholder="Ex : Maison de Lucas"
+    >
+
+
+    <label for="personnages-evenement">
+      Personnages concernés
+    </label>
+
+    <select
+      id="personnages-evenement"
+      multiple
+    ></select>
+
+    <small>
+      Maintiens Ctrl sur Windows ou Cmd sur Mac
+      pour sélectionner plusieurs personnages.
+    </small>
+
+
+    <label for="description-evenement">
+      Description
+    </label>
+
+    <textarea
+      id="description-evenement"
+      placeholder="Que se passe-t-il pendant cet événement ?"
+    ></textarea>
+
+
+    <div class="actions-formulaire">
+
+      <button id="enregistrer-evenement">
+        💾 Enregistrer
       </button>
 
-    </section>
+      <button id="annuler-evenement">
+        Annuler
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ÉVÉNEMENTS ENREGISTRÉS -->
+
+  <div id="liste-evenements"></div>
+
+</section>
 
   </main>
 

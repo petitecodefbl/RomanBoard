@@ -43,17 +43,167 @@
 
     <!-- TABLEAU DE BORD -->
 
-    <section id="dashboard">
+   <section id="dashboard">
 
-      <h2>📊 Tableau de bord</h2>
+  <h2>📊 Tableau de bord</h2>
 
-      <h3>Objectif du roman</h3>
+  <!-- PROGRESSION -->
 
-      <p>
+  <div class="bloc-progression">
+
+    <h3>Progression du roman</h3>
+
+    <div class="reglages-progression">
+
+      <div>
+        <label for="mots-actuels">
+          Mots écrits
+        </label>
+
+        <input
+          type="number"
+          id="mots-actuels"
+          min="0"
+          placeholder="Ex : 32000"
+        >
+      </div>
+
+
+      <div>
+        <label for="objectif-mots">
+          Objectif
+        </label>
+
+        <input
+          type="number"
+          id="objectif-mots"
+          min="1"
+          placeholder="Ex : 80000"
+        >
+      </div>
+
+
+      <div>
+        <label for="nombre-chapitres">
+          Chapitres
+        </label>
+
+        <input
+          type="number"
+          id="nombre-chapitres"
+          min="0"
+          placeholder="Ex : 12"
+        >
+      </div>
+
+
+      <div>
+        <label for="nombre-pages">
+          Pages
+        </label>
+
+        <input
+          type="number"
+          id="nombre-pages"
+          min="0"
+          placeholder="Ex : 184"
+        >
+      </div>
+
+    </div>
+
+
+    <button id="enregistrer-statistiques">
+      💾 Enregistrer
+    </button>
+
+
+    <!-- POURCENTAGE -->
+
+    <div class="progression-principale">
+
+      <div id="pourcentage-progression">
+        0 %
+      </div>
+
+      <div class="barre-progression">
+
+        <div id="remplissage-progression"></div>
+
+      </div>
+
+      <p id="texte-progression">
         0 / 80 000 mots
       </p>
 
-    </section>
+    </div>
+
+  </div>
+
+
+  <!-- STATISTIQUES -->
+
+  <div class="statistiques-dashboard">
+
+    <div class="statistique">
+
+      <div class="icone-statistique">
+        ✍️
+      </div>
+
+      <div
+        class="valeur-statistique"
+        id="stat-mots">
+        0
+      </div>
+
+      <div class="nom-statistique">
+        mots
+      </div>
+
+    </div>
+
+
+    <div class="statistique">
+
+      <div class="icone-statistique">
+        📖
+      </div>
+
+      <div
+        class="valeur-statistique"
+        id="stat-chapitres">
+        0
+      </div>
+
+      <div class="nom-statistique">
+        chapitres
+      </div>
+
+    </div>
+
+
+    <div class="statistique">
+
+      <div class="icone-statistique">
+        📄
+      </div>
+
+      <div
+        class="valeur-statistique"
+        id="stat-pages">
+        0
+      </div>
+
+      <div class="nom-statistique">
+        pages
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 
     <!-- PERSONNAGES -->

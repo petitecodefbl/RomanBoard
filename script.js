@@ -802,10 +802,10 @@ function dessinerCarteRelations() {
 
 
     bulle.style.left =
-      (x - 55) + "px";
+      (x - 45) + "px";
 
     bulle.style.top =
-      (y - 55) + "px";
+      (y - 45) + "px";
 
 
     bullesPersonnages.appendChild(

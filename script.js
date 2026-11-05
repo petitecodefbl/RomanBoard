@@ -800,6 +800,7 @@ function dessinerCarteRelations() {
     bulle.textContent =
       personnage.nom;
 
+    bulle.dataset.personnageIndex = index;
 
     bulle.style.left =
       (x - 45) + "px";
@@ -807,7 +808,30 @@ function dessinerCarteRelations() {
     bulle.style.top =
       (y - 45) + "px";
 
+bulle.addEventListener("click", function() {
 
+  // Ouvre l'onglet Personnages
+  afficherSection(personnages);
+
+  // Cherche toutes les fiches personnages
+  const cartes =
+    document.querySelectorAll(".carte-personnage");
+
+  const carte =
+    cartes[index];
+
+  // Descend jusqu'à la bonne fiche
+  if (carte) {
+
+    carte.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+
+  }
+
+});
+    
     bullesPersonnages.appendChild(
       bulle
     );

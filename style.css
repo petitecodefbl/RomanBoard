@@ -408,24 +408,31 @@ section h2 {
 }
 
 
+/* ZONE DE LA CARTE */
+
 #carte-relations {
   position: relative;
 
   width: 100%;
-  height: 500px;
+  height: 550px;
 
   margin-top: 20px;
 
-  background-color: #f4f1ec;
+  background:
+    radial-gradient(
+      circle at center,
+      #ffffff 0%,
+      #f8f6f2 100%
+    );
 
-  border: 1px solid #dddddd;
-  border-radius: 15px;
+  border: 1px solid #e2ddd6;
+  border-radius: 20px;
 
   overflow: hidden;
 }
 
 
-/* LIGNES ENTRE LES PERSONNAGES */
+/* LIGNES */
 
 #lignes-relations {
   position: absolute;
@@ -437,10 +444,12 @@ section h2 {
   height: 100%;
 
   pointer-events: none;
+
+  z-index: 1;
 }
 
 
-/* ZONE DES PERSONNAGES */
+/* ZONE DES BULLES */
 
 #bulles-personnages {
   position: absolute;
@@ -450,16 +459,18 @@ section h2 {
 
   width: 100%;
   height: 100%;
+
+  z-index: 2;
 }
 
 
-/* BULLE PERSONNAGE */
+/* PERSONNAGES */
 
 .bulle-personnage {
   position: absolute;
 
-  width: 110px;
-  height: 110px;
+  width: 90px;
+  height: 90px;
 
   display: flex;
   align-items: center;
@@ -469,30 +480,46 @@ section h2 {
 
   background-color: white;
 
-  border: 3px solid #252525;
+  border: 2px solid #292929;
   border-radius: 50%;
 
+  font-size: 15px;
   font-weight: bold;
+
   text-align: center;
 
   cursor: pointer;
 
-  z-index: 2;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.10);
 
-  transition: transform 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 
 .bulle-personnage:hover {
   transform: scale(1.08);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.16);
 }
 
 
-/* TEXTE SUR LES RELATIONS */
+/* NOM DES RELATIONS */
 
 .texte-relation {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: bold;
 
-  fill: #333333;
+  fill: #444444;
+
+  paint-order: stroke;
+
+  stroke: #f8f6f2;
+  stroke-width: 6px;
+  stroke-linejoin: round;
 }
+
+

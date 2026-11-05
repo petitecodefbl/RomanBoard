@@ -552,3 +552,187 @@ section h2 {
   }
 
 }
+
+/* ========================================
+   CHRONOLOGIE
+======================================== */
+
+#formulaire-evenement {
+  display: none;
+
+  margin-top: 25px;
+  padding: 25px;
+
+  background-color: #f4f1ec;
+  border-radius: 12px;
+}
+
+
+/* TITRE DU FORMULAIRE */
+
+#formulaire-evenement h3 {
+  margin-top: 0;
+}
+
+
+/* LABELS */
+
+#formulaire-evenement label {
+  display: block;
+
+  margin-top: 18px;
+  margin-bottom: 6px;
+
+  font-weight: bold;
+}
+
+
+/* CHAMPS */
+
+#formulaire-evenement input,
+#formulaire-evenement select,
+#formulaire-evenement textarea {
+  display: block;
+
+  width: 100%;
+
+  padding: 10px;
+
+  border: 1px solid #cccccc;
+  border-radius: 7px;
+
+  background-color: white;
+
+  font-family: inherit;
+  font-size: 15px;
+}
+
+
+/* PERSONNAGES */
+
+#personnages-evenement {
+  min-height: 120px;
+}
+
+
+/* DESCRIPTION */
+
+#formulaire-evenement textarea {
+  min-height: 100px;
+
+  resize: vertical;
+}
+
+
+/* PETIT TEXTE SOUS PERSONNAGES */
+
+#formulaire-evenement small {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #777777;
+}
+
+
+/* BOUTONS */
+
+#formulaire-evenement .actions-formulaire {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 25px;
+}
+
+
+#enregistrer-evenement {
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: #252525;
+  color: white;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+
+#annuler-evenement {
+  padding: 12px 20px;
+
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+
+  background-color: white;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+
+/* ========================================
+   ÉVÉNEMENTS ENREGISTRÉS
+======================================== */
+
+#liste-evenements {
+  display: grid;
+
+  gap: 15px;
+
+  margin-top: 30px;
+}
+
+
+.carte-evenement {
+  padding: 20px;
+
+  background-color: white;
+
+  border: 1px solid #dddddd;
+  border-left: 5px solid #252525;
+  border-radius: 10px;
+}
+
+
+.carte-evenement h3 {
+  margin-top: 0;
+}
+
+
+.actions-evenement {
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 15px;
+}
+
+
+.modifier-evenement,
+.supprimer-evenement {
+  padding: 8px 12px;
+
+  border: none;
+  border-radius: 7px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+
+.modifier-evenement {
+  background-color: #eeeeee;
+}
+
+
+.supprimer-evenement {
+  background-color: #ffe5e5;
+  color: #a00000;
+}
+

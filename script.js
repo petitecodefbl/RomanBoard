@@ -1140,6 +1140,8 @@ boutonEnregistrerEvenement.addEventListener("click", function() {
 
   afficherEvenements();
 
+  afficherFrise();
+
   formulaireEvenement.style.display = "none";
 
   viderFormulaireEvenement();
@@ -1326,6 +1328,8 @@ listeEvenementsHTML.addEventListener("click", function(event) {
 
       afficherEvenements();
 
+      afficherFrise();
+
     }
 
   }
@@ -1372,3 +1376,105 @@ function viderFormulaireEvenement() {
 // ========================================
 
 afficherEvenements();
+
+// ========================================
+// FRISE CHRONOLOGIQUE
+// ========================================
+
+const friseEvenements =
+  document.getElementById("frise-evenements");
+
+
+function afficherFrise() {
+
+  friseEvenements.innerHTML = "";
+
+
+  if (listeDesEvenements.length === 0) {
+
+    friseEvenements.innerHTML =
+      "<p>Aucun événement dans la chronologie.</p>";
+
+    return;
+
+  }
+
+
+  listeDesEvenements.forEach(function(evenement, index) {
+
+    const element =
+      document.createElement("div");
+
+    element.classList.add("evenement-frise");
+
+
+    element.innerHTML = `
+
+      <div class="date-frise">
+        ${evenement.date || "Date inconnue"}
+      </div>
+
+      <div class="point-frise"></div>
+
+      <div class="nom-evenement-frise">
+        ${evenement.titre}
+      </div>
+
+      <div class="chapitre-frise">
+        ${evenement.chapitre || ""}
+      </div>
+
+    `;
+
+
+    // CLIC SUR UN ÉVÉNEMENT DE LA FRISE
+
+    element.addEventListener("click", function() {
+
+      const cartes =
+        document.querySelectorAll(".carte-evenement");
+
+      const carte =
+        cartes[index];
+
+
+      if (carte) {
+
+        carte.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+
+
+        // Effet lumineux
+
+        carte.classList.remove("surlignee");
+
+        void carte.offsetWidth;
+
+        carte.classList.add("surlignee");
+
+
+        setTimeout(function() {
+
+          carte.classList.remove("surlignee");
+
+        }, 1800);
+
+      }
+
+    });
+
+
+    friseEvenements.appendChild(element);
+
+  });
+
+}
+
+
+// Premier affichage
+
+afficherFrise();
+
+

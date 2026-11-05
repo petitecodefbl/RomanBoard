@@ -523,3 +523,32 @@ section h2 {
 }
 
 
+/* ===== PERSONNAGE SÉLECTIONNÉ ===== */
+
+.carte-personnage.surlignee {
+  animation: surbrillancePersonnage 1.8s ease;
+}
+
+@keyframes surbrillancePersonnage {
+
+  0% {
+    transform: scale(1);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  30% {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(120, 90, 160, 0.55);
+  }
+
+  70% {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(120, 90, 160, 0.55);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  }
+
+}

@@ -62,192 +62,216 @@
          TABLEAU DE BORD
     ====================================== -->
 
-    <section id="dashboard">
+<section id="dashboard">
 
-      <h2>📊 Tableau de bord</h2>
+  <h2>📊 Tableau de bord</h2>
 
+  <!-- PROGRESSION -->
 
-      <div class="bloc-progression">
+  <div class="bloc-progression">
 
-        <h3>Progression du roman</h3>
+    <h3>Progression du roman</h3>
 
+    <div id="pourcentage-progression">
+      0 %
+    </div>
 
-        <div class="reglages-progression">
+    <div class="barre-progression">
+      <div id="remplissage-progression"></div>
+    </div>
 
+    <p id="texte-progression">
+      0 / 80 000 mots
+    </p>
 
-          <!-- MOTS -->
-
-          <div class="champ-statistique">
-
-            <label for="mots-actuels">
-              Mots écrits
-            </label>
-
-            <input
-              type="number"
-              id="mots-actuels"
-              min="0"
-              placeholder="Ex : 32000"
-            >
-
-          </div>
+  </div>
 
 
-          <!-- OBJECTIF -->
+  <!-- STATISTIQUES -->
 
-          <div class="champ-statistique">
+  <div class="statistiques-dashboard">
 
-            <label for="objectif-mots">
-              Objectif de mots
-            </label>
+    <div class="statistique">
 
-            <input
-              type="number"
-              id="objectif-mots"
-              min="1"
-              placeholder="Ex : 80000"
-            >
+      <div class="icone-statistique">✍️</div>
 
-          </div>
-
-
-          <!-- CHAPITRES -->
-
-          <div class="champ-statistique">
-
-            <label for="nombre-chapitres">
-              Nombre de chapitres
-            </label>
-
-            <input
-              type="number"
-              id="nombre-chapitres"
-              min="0"
-              placeholder="Ex : 12"
-            >
-
-          </div>
-
-
-          <!-- PAGES -->
-
-          <div class="champ-statistique">
-
-            <label for="nombre-pages">
-              Nombre de pages
-            </label>
-
-            <input
-              type="number"
-              id="nombre-pages"
-              min="0"
-              placeholder="Ex : 184"
-            >
-
-          </div>
-
-        </div>
-
-
-        <!-- ENREGISTRER -->
-
-        <button id="enregistrer-statistiques">
-          💾 Enregistrer
-        </button>
-
-
-        <!-- PROGRESSION -->
-
-        <div class="progression-principale">
-
-          <div id="pourcentage-progression">
-            0 %
-          </div>
-
-
-          <div class="barre-progression">
-
-            <div id="remplissage-progression"></div>
-
-          </div>
-
-
-          <p id="texte-progression">
-            0 / 80 000 mots
-          </p>
-
-        </div>
-
+      <div
+        class="valeur-statistique"
+        id="stat-mots"
+      >
+        0
       </div>
 
-
-      <!-- CARTES STATISTIQUES -->
-
-      <div class="statistiques-dashboard">
-
-
-        <div class="statistique">
-
-          <div class="icone-statistique">
-            ✍️
-          </div>
-
-          <div
-            class="valeur-statistique"
-            id="stat-mots"
-          >
-            0
-          </div>
-
-          <div class="nom-statistique">
-            mots
-          </div>
-
-        </div>
-
-
-        <div class="statistique">
-
-          <div class="icone-statistique">
-            📖
-          </div>
-
-          <div
-            class="valeur-statistique"
-            id="stat-chapitres"
-          >
-            0
-          </div>
-
-          <div class="nom-statistique">
-            chapitres
-          </div>
-
-        </div>
-
-
-        <div class="statistique">
-
-          <div class="icone-statistique">
-            📄
-          </div>
-
-          <div
-            class="valeur-statistique"
-            id="stat-pages"
-          >
-            0
-          </div>
-
-          <div class="nom-statistique">
-            pages
-          </div>
-
-        </div>
-
+      <div class="nom-statistique">
+        mots
       </div>
 
-    </section>
+    </div>
+
+
+    <div class="statistique">
+
+      <div class="icone-statistique">📖</div>
+
+      <div
+        class="valeur-statistique"
+        id="stat-chapitres"
+      >
+        0
+      </div>
+
+      <div class="nom-statistique">
+        chapitres
+      </div>
+
+    </div>
+
+
+    <div class="statistique">
+
+      <div class="icone-statistique">📄</div>
+
+      <div
+        class="valeur-statistique"
+        id="stat-pages"
+      >
+        0
+      </div>
+
+      <div class="nom-statistique">
+        pages
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- CONFIGURATION DE DÉPART -->
+
+  <div id="configuration-roman">
+
+    <h3>⚙️ Réglages du roman</h3>
+
+    <p>
+      À remplir une première fois pour indiquer
+      où tu en es actuellement.
+    </p>
+
+
+    <label for="total-depart">
+      Nombre de mots déjà écrits
+    </label>
+
+    <input
+      type="number"
+      id="total-depart"
+      min="0"
+      placeholder="Ex : 2829"
+    >
+
+
+    <label for="objectif-mots">
+      Objectif de mots
+    </label>
+
+    <input
+      type="number"
+      id="objectif-mots"
+      min="1"
+      placeholder="Ex : 80000"
+    >
+
+
+    <button id="enregistrer-reglages">
+      💾 Enregistrer les réglages
+    </button>
+
+  </div>
+
+
+  <!-- NOUVELLE SESSION -->
+
+  <div id="nouvelle-session">
+
+    <h3>✍️ Ajouter ma session d'écriture</h3>
+
+
+    <label for="mots-session">
+      Combien de mots as-tu écrits ?
+    </label>
+
+    <input
+      type="number"
+      id="mots-session"
+      min="0"
+      placeholder="Ex : 750"
+    >
+
+
+    <label for="pages-session">
+      Combien de pages as-tu maintenant ?
+    </label>
+
+    <input
+      type="number"
+      id="pages-session"
+      min="0"
+      placeholder="Ex : 14"
+    >
+
+
+    <label for="chapitres-session">
+      Combien de chapitres as-tu maintenant ?
+    </label>
+
+    <input
+      type="number"
+      id="chapitres-session"
+      min="0"
+      placeholder="Ex : 2"
+    >
+
+
+    <button id="ajouter-session">
+      + Ajouter la session
+    </button>
+
+  </div>
+
+
+  <!-- AUJOURD'HUI -->
+
+  <div id="resume-aujourdhui">
+
+    <h3>☀️ Aujourd'hui</h3>
+
+    <p>
+      <strong id="mots-aujourdhui">
+        +0 mots
+      </strong>
+    </p>
+
+  </div>
+
+
+  <!-- HISTORIQUE -->
+
+  <div id="historique-ecriture">
+
+    <h3>🗓️ Historique d'écriture</h3>
+
+    <div id="liste-sessions">
+
+      <p>
+        Aucune session enregistrée pour le moment.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
 
 
     <!-- =====================================

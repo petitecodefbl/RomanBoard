@@ -1477,4 +1477,610 @@ function afficherFrise() {
 
 afficherFrise();
 
+// ========================================
+// TABLEAU DE BORD - JOURNAL D'ÉCRITURE
+// ========================================
+
+
+// ===== ÉLÉMENTS HTML =====
+
+const totalDepartInput =
+  document.getElementById("total-depart");
+
+const objectifMotsInput =
+  document.getElementById("objectif-mots");
+
+const boutonEnregistrerReglages =
+  document.getElementById("enregistrer-reglages");
+
+
+const motsSessionInput =
+  document.getElementById("mots-session");
+
+const pagesSessionInput =
+  document.getElementById("pages-session");
+
+const chapitresSessionInput =
+  document.getElementById("chapitres-session");
+
+const boutonAjouterSession =
+  document.getElementById("ajouter-session");
+
+
+const pourcentageProgressionDashboard =
+  document.getElementById("pourcentage-progression");
+
+const remplissageProgressionDashboard =
+  document.getElementById("remplissage-progression");
+
+const texteProgressionDashboard =
+  document.getElementById("texte-progression");
+
+
+const statMotsDashboard =
+  document.getElementById("stat-mots");
+
+const statChapitresDashboard =
+  document.getElementById("stat-chapitres");
+
+const statPagesDashboard =
+  document.getElementById("stat-pages");
+
+
+const motsAujourdhui =
+  document.getElementById("mots-aujourdhui");
+
+const listeSessionsHTML =
+  document.getElementById("liste-sessions");
+
+
+// ========================================
+// CHARGEMENT DES DONNÉES
+// ========================================
+
+let reglagesRoman =
+  JSON.parse(
+    localStorage.getItem("reglagesRoman")
+  ) || {
+    totalDepart: 0,
+    objectif: 80000
+  };
+
+
+let sessionsEcriture =
+  JSON.parse(
+    localStorage.getItem("sessionsEcriture")
+  ) || [];
+
+
+// ========================================
+// DATE LOCALE
+// ========================================
+
+function obtenirDateLocale() {
+
+  const maintenant = new Date();
+
+  const annee =
+    maintenant.getFullYear();
+
+  const mois =
+    String(maintenant.getMonth() + 1)
+      .padStart(2, "0");
+
+  const jour =
+    String(maintenant.getDate())
+      .padStart(2, "0");
+
+  return annee + "-" + mois + "-" + jour;
+
+}
+
+
+// ========================================
+// DATE LISIBLE
+// ========================================
+
+function formaterDateSession(date) {
+
+  const morceaux =
+    date.split("-");
+
+  const dateLocale =
+    new Date(
+      Number(morceaux[0]),
+      Number(morceaux[1]) - 1,
+      Number(morceaux[2])
+    );
+
+  return dateLocale.toLocaleDateString(
+    "fr-FR",
+    {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    }
+  );
+
+}
+
+
+// ========================================
+// CALCUL DU TOTAL DE MOTS
+// ========================================
+
+function calculerTotalMots() {
+
+  let total =
+    Number(reglagesRoman.totalDepart) || 0;
+
+
+  sessionsEcriture.forEach(function(session) {
+
+    total +=
+      Number(session.mots) || 0;
+
+  });
+
+
+  return total;
+
+}
+
+
+// ========================================
+// DERNIER NOMBRE DE PAGES
+// ========================================
+
+function obtenirPagesActuelles() {
+
+  if (sessionsEcriture.length === 0) {
+    return 0;
+  }
+
+
+  const derniereSession =
+    sessionsEcriture[
+      sessionsEcriture.length - 1
+    ];
+
+
+  return Number(derniereSession.pages) || 0;
+
+}
+
+
+// ========================================
+// DERNIER NOMBRE DE CHAPITRES
+// ========================================
+
+function obtenirChapitresActuels() {
+
+  if (sessionsEcriture.length === 0) {
+    return 0;
+  }
+
+
+  const derniereSession =
+    sessionsEcriture[
+      sessionsEcriture.length - 1
+    ];
+
+
+  return Number(derniereSession.chapitres) || 0;
+
+}
+
+
+// ========================================
+// MOTS ÉCRITS AUJOURD'HUI
+// ========================================
+
+function calculerMotsAujourdhui() {
+
+  const aujourdHui =
+    obtenirDateLocale();
+
+  let totalAujourdHui = 0;
+
+
+  sessionsEcriture.forEach(function(session) {
+
+    if (session.date === aujourdHui) {
+
+      totalAujourdHui +=
+        Number(session.mots) || 0;
+
+    }
+
+  });
+
+
+  return totalAujourdHui;
+
+}
+
+
+// ========================================
+// AFFICHER LE TABLEAU DE BORD
+// ========================================
+
+function afficherDashboardEcriture() {
+
+  const totalMots =
+    calculerTotalMots();
+
+  const objectif =
+    Number(reglagesRoman.objectif) || 80000;
+
+  const pages =
+    obtenirPagesActuelles();
+
+  const chapitres =
+    obtenirChapitresActuels();
+
+
+  // ===== POURCENTAGE =====
+
+  let pourcentage = 0;
+
+  if (objectif > 0) {
+
+    pourcentage =
+      (totalMots / objectif) * 100;
+
+  }
+
+
+  const largeurBarre =
+    Math.min(
+      Math.max(pourcentage, 0),
+      100
+    );
+
+
+  pourcentageProgressionDashboard.textContent =
+    pourcentage.toFixed(1) + " %";
+
+
+  remplissageProgressionDashboard.style.width =
+    largeurBarre + "%";
+
+
+  texteProgressionDashboard.textContent =
+    totalMots.toLocaleString("fr-FR") +
+    " / " +
+    objectif.toLocaleString("fr-FR") +
+    " mots";
+
+
+  // ===== CARTES =====
+
+  statMotsDashboard.textContent =
+    totalMots.toLocaleString("fr-FR");
+
+  statPagesDashboard.textContent =
+    pages;
+
+  statChapitresDashboard.textContent =
+    chapitres;
+
+
+  // ===== AUJOURD'HUI =====
+
+  const motsDuJour =
+    calculerMotsAujourdhui();
+
+  motsAujourdhui.textContent =
+    "+" +
+    motsDuJour.toLocaleString("fr-FR") +
+    " mots";
+
+
+  // ===== RÉGLAGES =====
+
+  totalDepartInput.value =
+    reglagesRoman.totalDepart;
+
+  objectifMotsInput.value =
+    reglagesRoman.objectif;
+
+
+  afficherHistoriqueEcriture();
+
+}
+
+
+// ========================================
+// ENREGISTRER LES RÉGLAGES
+// ========================================
+
+boutonEnregistrerReglages.addEventListener(
+  "click",
+  function() {
+
+    const totalDepart =
+      Math.max(
+        0,
+        Number(totalDepartInput.value) || 0
+      );
+
+
+    const objectif =
+      Math.max(
+        1,
+        Number(objectifMotsInput.value) || 80000
+      );
+
+
+    reglagesRoman = {
+      totalDepart: totalDepart,
+      objectif: objectif
+    };
+
+
+    localStorage.setItem(
+      "reglagesRoman",
+      JSON.stringify(reglagesRoman)
+    );
+
+
+    afficherDashboardEcriture();
+
+  }
+);
+
+
+// ========================================
+// AJOUTER UNE SESSION
+// ========================================
+
+boutonAjouterSession.addEventListener(
+  "click",
+  function() {
+
+    const mots =
+      Math.max(
+        0,
+        Number(motsSessionInput.value) || 0
+      );
+
+
+    const pages =
+      Math.max(
+        0,
+        Number(pagesSessionInput.value) || 0
+      );
+
+
+    const chapitres =
+      Math.max(
+        0,
+        Number(chapitresSessionInput.value) || 0
+      );
+
+
+    // Il faut au moins saisir quelque chose
+
+    if (
+      mots === 0 &&
+      pagesSessionInput.value === "" &&
+      chapitresSessionInput.value === ""
+    ) {
+
+      alert(
+        "Entre au moins le nombre de mots écrits."
+      );
+
+      return;
+
+    }
+
+
+    const nouvelleSession = {
+
+      date: obtenirDateLocale(),
+
+      mots: mots,
+
+      pages: pages,
+
+      chapitres: chapitres
+
+    };
+
+
+    sessionsEcriture.push(
+      nouvelleSession
+    );
+
+
+    sauvegarderSessionsEcriture();
+
+
+    // Vide uniquement les mots.
+    // Pages et chapitres restent affichés
+    // comme repère pour la prochaine fois.
+
+    motsSessionInput.value = "";
+
+    pagesSessionInput.value =
+      pages;
+
+    chapitresSessionInput.value =
+      chapitres;
+
+
+    afficherDashboardEcriture();
+
+  }
+);
+
+
+// ========================================
+// SAUVEGARDER LES SESSIONS
+// ========================================
+
+function sauvegarderSessionsEcriture() {
+
+  localStorage.setItem(
+    "sessionsEcriture",
+    JSON.stringify(sessionsEcriture)
+  );
+
+}
+
+
+// ========================================
+// HISTORIQUE
+// ========================================
+
+function afficherHistoriqueEcriture() {
+
+  listeSessionsHTML.innerHTML = "";
+
+
+  if (sessionsEcriture.length === 0) {
+
+    listeSessionsHTML.innerHTML =
+      "<p>Aucune session enregistrée pour le moment.</p>";
+
+    return;
+
+  }
+
+
+  // On affiche les plus récentes en premier
+
+  const sessionsInversees =
+    sessionsEcriture
+      .map(function(session, index) {
+
+        return {
+          session: session,
+          indexOriginal: index
+        };
+
+      })
+      .reverse();
+
+
+  sessionsInversees.forEach(function(element) {
+
+    const session =
+      element.session;
+
+    const index =
+      element.indexOriginal;
+
+
+    const bloc =
+      document.createElement("div");
+
+
+    bloc.classList.add(
+      "session-ecriture"
+    );
+
+
+    bloc.innerHTML = `
+
+      <div class="infos-session">
+
+        <div class="date-session">
+          ${formaterDateSession(session.date)}
+        </div>
+
+        <div class="mots-session-historique">
+          +${Number(session.mots).toLocaleString("fr-FR")} mots
+        </div>
+
+        <div class="details-session">
+          📄 ${session.pages} pages
+          •
+          📖 ${session.chapitres} chapitres
+        </div>
+
+      </div>
+
+
+      <button
+        class="supprimer-session"
+        data-session-index="${index}"
+      >
+        🗑️ Supprimer
+      </button>
+
+    `;
+
+
+    listeSessionsHTML.appendChild(
+      bloc
+    );
+
+  });
+
+}
+
+
+// ========================================
+// SUPPRIMER UNE SESSION
+// ========================================
+
+listeSessionsHTML.addEventListener(
+  "click",
+  function(event) {
+
+    if (
+      event.target.classList.contains(
+        "supprimer-session"
+      )
+    ) {
+
+      const index =
+        Number(
+          event.target.dataset.sessionIndex
+        );
+
+
+      const session =
+        sessionsEcriture[index];
+
+
+      const confirmation =
+        confirm(
+          "Supprimer la session de " +
+          Number(session.mots)
+            .toLocaleString("fr-FR") +
+          " mots ?"
+        );
+
+
+      if (confirmation) {
+
+        sessionsEcriture.splice(
+          index,
+          1
+        );
+
+
+        sauvegarderSessionsEcriture();
+
+
+        afficherDashboardEcriture();
+
+      }
+
+    }
+
+  }
+);
+
+
+// ========================================
+// PREMIER AFFICHAGE
+// ========================================
+
+afficherDashboardEcriture();
+
 

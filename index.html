@@ -3,20 +3,36 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Mon Roman</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Un été spécial - RomanBoard</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
+
 <body>
 
+  <!-- =====================================
+       EN-TÊTE
+  ====================================== -->
+
   <header>
+
     <h1>Un été spécial</h1>
+
     <p>Mon espace d'écriture</p>
+
   </header>
 
+
+  <!-- =====================================
+       MENU
+  ====================================== -->
 
   <nav>
 
@@ -41,497 +57,594 @@
 
   <main>
 
-    <!-- TABLEAU DE BORD -->
 
-   <section id="dashboard">
+    <!-- =====================================
+         TABLEAU DE BORD
+    ====================================== -->
 
-  <h2>📊 Tableau de bord</h2>
+    <section id="dashboard">
 
-  <!-- PROGRESSION -->
+      <h2>📊 Tableau de bord</h2>
 
-  <div class="bloc-progression">
 
-    <h3>Progression du roman</h3>
+      <div class="bloc-progression">
 
-    <div class="reglages-progression">
+        <h3>Progression du roman</h3>
 
-      <div>
-        <label for="mots-actuels">
-          Mots écrits
+
+        <div class="reglages-progression">
+
+
+          <!-- MOTS -->
+
+          <div class="champ-statistique">
+
+            <label for="mots-actuels">
+              Mots écrits
+            </label>
+
+            <input
+              type="number"
+              id="mots-actuels"
+              min="0"
+              placeholder="Ex : 32000"
+            >
+
+          </div>
+
+
+          <!-- OBJECTIF -->
+
+          <div class="champ-statistique">
+
+            <label for="objectif-mots">
+              Objectif de mots
+            </label>
+
+            <input
+              type="number"
+              id="objectif-mots"
+              min="1"
+              placeholder="Ex : 80000"
+            >
+
+          </div>
+
+
+          <!-- CHAPITRES -->
+
+          <div class="champ-statistique">
+
+            <label for="nombre-chapitres">
+              Nombre de chapitres
+            </label>
+
+            <input
+              type="number"
+              id="nombre-chapitres"
+              min="0"
+              placeholder="Ex : 12"
+            >
+
+          </div>
+
+
+          <!-- PAGES -->
+
+          <div class="champ-statistique">
+
+            <label for="nombre-pages">
+              Nombre de pages
+            </label>
+
+            <input
+              type="number"
+              id="nombre-pages"
+              min="0"
+              placeholder="Ex : 184"
+            >
+
+          </div>
+
+        </div>
+
+
+        <!-- ENREGISTRER -->
+
+        <button id="enregistrer-statistiques">
+          💾 Enregistrer
+        </button>
+
+
+        <!-- PROGRESSION -->
+
+        <div class="progression-principale">
+
+          <div id="pourcentage-progression">
+            0 %
+          </div>
+
+
+          <div class="barre-progression">
+
+            <div id="remplissage-progression"></div>
+
+          </div>
+
+
+          <p id="texte-progression">
+            0 / 80 000 mots
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- CARTES STATISTIQUES -->
+
+      <div class="statistiques-dashboard">
+
+
+        <div class="statistique">
+
+          <div class="icone-statistique">
+            ✍️
+          </div>
+
+          <div
+            class="valeur-statistique"
+            id="stat-mots"
+          >
+            0
+          </div>
+
+          <div class="nom-statistique">
+            mots
+          </div>
+
+        </div>
+
+
+        <div class="statistique">
+
+          <div class="icone-statistique">
+            📖
+          </div>
+
+          <div
+            class="valeur-statistique"
+            id="stat-chapitres"
+          >
+            0
+          </div>
+
+          <div class="nom-statistique">
+            chapitres
+          </div>
+
+        </div>
+
+
+        <div class="statistique">
+
+          <div class="icone-statistique">
+            📄
+          </div>
+
+          <div
+            class="valeur-statistique"
+            id="stat-pages"
+          >
+            0
+          </div>
+
+          <div class="nom-statistique">
+            pages
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================
+         PERSONNAGES
+    ====================================== -->
+
+    <section id="personnages">
+
+      <h2>👤 Personnages</h2>
+
+
+      <button id="ajouter-personnage">
+        + Ajouter un personnage
+      </button>
+
+
+      <!-- FORMULAIRE PERSONNAGE -->
+
+      <div id="formulaire-personnage">
+
+        <h3>Nouveau personnage</h3>
+
+
+        <label for="nom-personnage">
+          Nom
+        </label>
+
+        <input
+          type="text"
+          id="nom-personnage"
+          placeholder="Ex : Emma"
+        >
+
+
+        <label for="age-personnage">
+          Âge
         </label>
 
         <input
           type="number"
-          id="mots-actuels"
-          min="0"
-          placeholder="Ex : 32000"
+          id="age-personnage"
+          placeholder="Ex : 27"
         >
-      </div>
 
 
-      <div>
-        <label for="objectif-mots">
-          Objectif
+        <label for="genre-personnage">
+          Genre
+        </label>
+
+        <select id="genre-personnage">
+
+          <option value="">
+            Non renseigné
+          </option>
+
+          <option value="Femme">
+            Femme
+          </option>
+
+          <option value="Homme">
+            Homme
+          </option>
+
+          <option value="Non-binaire">
+            Non-binaire
+          </option>
+
+          <option value="Autre">
+            Autre
+          </option>
+
+        </select>
+
+
+        <label for="role-personnage">
+          Rôle dans l'histoire
         </label>
 
         <input
-          type="number"
-          id="objectif-mots"
-          min="1"
-          placeholder="Ex : 80000"
+          type="text"
+          id="role-personnage"
+          placeholder="Ex : Personnage principal"
         >
+
+
+        <label for="apparence-personnage">
+          Apparence
+        </label>
+
+        <textarea
+          id="apparence-personnage"
+          placeholder="Cheveux, yeux, vêtements, signes particuliers..."
+        ></textarea>
+
+
+        <label for="personnalite-personnage">
+          Personnalité
+        </label>
+
+        <textarea
+          id="personnalite-personnage"
+          placeholder="Qualités, défauts, peurs, habitudes..."
+        ></textarea>
+
+
+        <label for="notes-personnage">
+          Notes
+        </label>
+
+        <textarea
+          id="notes-personnage"
+          placeholder="Secrets, passé, idées..."
+        ></textarea>
+
+
+        <div class="actions-formulaire">
+
+          <button id="enregistrer-personnage">
+            💾 Enregistrer
+          </button>
+
+          <button id="annuler-personnage">
+            Annuler
+          </button>
+
+        </div>
+
       </div>
 
 
-      <div>
-        <label for="nombre-chapitres">
-          Chapitres
+      <!-- LISTE DES PERSONNAGES -->
+
+      <div id="liste-personnages"></div>
+
+    </section>
+
+
+    <!-- =====================================
+         RELATIONS
+    ====================================== -->
+
+    <section id="relations">
+
+      <h2>🕸️ Relations</h2>
+
+
+      <button id="ajouter-relation">
+        + Ajouter une relation
+      </button>
+
+
+      <!-- FORMULAIRE RELATION -->
+
+      <div id="formulaire-relation">
+
+        <h3>Nouvelle relation</h3>
+
+
+        <label for="personnage-1">
+          Premier personnage
+        </label>
+
+        <select id="personnage-1"></select>
+
+
+        <label for="type-relation">
+          Type de relation
+        </label>
+
+        <select id="type-relation">
+
+          <option value="❤️ Amour">
+            ❤️ Amour
+          </option>
+
+          <option value="🤝 Amitié">
+            🤝 Amitié
+          </option>
+
+          <option value="👨‍👩‍👧 Famille">
+            👨‍👩‍👧 Famille
+          </option>
+
+          <option value="⚔️ Ennemi">
+            ⚔️ Ennemi
+          </option>
+
+          <option value="💼 Collègue">
+            💼 Collègue
+          </option>
+
+          <option value="❓ Autre">
+            ❓ Autre
+          </option>
+
+        </select>
+
+
+        <label for="personnage-2">
+          Deuxième personnage
+        </label>
+
+        <select id="personnage-2"></select>
+
+
+        <label for="description-relation">
+          Détails
+        </label>
+
+        <textarea
+          id="description-relation"
+          placeholder="Ex : amis d'enfance, relation secrète..."
+        ></textarea>
+
+
+        <div class="actions-formulaire">
+
+          <button id="enregistrer-relation">
+            💾 Enregistrer
+          </button>
+
+          <button id="annuler-relation">
+            Annuler
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- CARTE DES RELATIONS -->
+
+      <h3 class="titre-carte">
+        🕸️ Carte des relations
+      </h3>
+
+
+      <div id="carte-relations">
+
+        <svg id="lignes-relations"></svg>
+
+        <div id="bulles-personnages"></div>
+
+      </div>
+
+
+      <!-- RELATIONS ENREGISTRÉES -->
+
+      <h3>
+        📋 Relations enregistrées
+      </h3>
+
+      <div id="liste-relations"></div>
+
+    </section>
+
+
+    <!-- =====================================
+         CHRONOLOGIE
+    ====================================== -->
+
+    <section id="chronologie">
+
+      <h2>🕐 Chronologie</h2>
+
+
+      <button id="ajouter-evenement">
+        + Ajouter un événement
+      </button>
+
+
+      <!-- FORMULAIRE ÉVÉNEMENT -->
+
+      <div id="formulaire-evenement">
+
+        <h3>Nouvel événement</h3>
+
+
+        <label for="titre-evenement">
+          Titre
         </label>
 
         <input
-          type="number"
-          id="nombre-chapitres"
-          min="0"
-          placeholder="Ex : 12"
+          type="text"
+          id="titre-evenement"
+          placeholder="Ex : Rencontre entre Inaya et Lucas"
         >
-      </div>
 
 
-      <div>
-        <label for="nombre-pages">
-          Pages
+        <label for="date-evenement">
+          Date ou période dans l'histoire
         </label>
 
         <input
-          type="number"
-          id="nombre-pages"
-          min="0"
-          placeholder="Ex : 184"
+          type="text"
+          id="date-evenement"
+          placeholder="Ex : 15 juillet, Été, Jour 3..."
         >
+
+
+        <label for="chapitre-evenement">
+          Chapitre
+        </label>
+
+        <input
+          type="text"
+          id="chapitre-evenement"
+          placeholder="Ex : Chapitre 7"
+        >
+
+
+        <label for="lieu-evenement">
+          Lieu
+        </label>
+
+        <input
+          type="text"
+          id="lieu-evenement"
+          placeholder="Ex : Maison de Lucas"
+        >
+
+
+        <!-- PERSONNAGES CONCERNÉS -->
+
+        <label for="personnages-evenement">
+          Personnages concernés
+        </label>
+
+        <select
+          id="personnages-evenement"
+          multiple
+        ></select>
+
+        <small>
+          Maintiens Ctrl sur Windows ou Cmd sur Mac
+          pour sélectionner plusieurs personnages.
+        </small>
+
+
+        <label for="description-evenement">
+          Description
+        </label>
+
+        <textarea
+          id="description-evenement"
+          placeholder="Que se passe-t-il pendant cet événement ?"
+        ></textarea>
+
+
+        <div class="actions-formulaire">
+
+          <button id="enregistrer-evenement">
+            💾 Enregistrer
+          </button>
+
+          <button id="annuler-evenement">
+            Annuler
+          </button>
+
+        </div>
+
       </div>
 
-    </div>
+
+      <!-- FRISE CHRONOLOGIQUE -->
+
+      <h3 class="titre-frise">
+        🕐 Frise chronologique
+      </h3>
 
 
-    <button id="enregistrer-statistiques">
-      💾 Enregistrer
-    </button>
+      <div id="frise-conteneur">
 
-
-    <!-- POURCENTAGE -->
-
-    <div class="progression-principale">
-
-      <div id="pourcentage-progression">
-        0 %
-      </div>
-
-      <div class="barre-progression">
-
-        <div id="remplissage-progression"></div>
+        <div id="frise-evenements"></div>
 
       </div>
 
-      <p id="texte-progression">
-        0 / 80 000 mots
-      </p>
 
-    </div>
+      <!-- ÉVÉNEMENTS DÉTAILLÉS -->
 
-  </div>
+      <h3 class="titre-liste-evenements">
+        📋 Événements détaillés
+      </h3>
 
+      <div id="liste-evenements"></div>
 
-  <!-- STATISTIQUES -->
+    </section>
 
-  <div class="statistiques-dashboard">
 
-    <div class="statistique">
+  </main>
 
-      <div class="icone-statistique">
-        ✍️
-      </div>
 
-      <div
-        class="valeur-statistique"
-        id="stat-mots">
-        0
-      </div>
+  <!-- =====================================
+       JAVASCRIPT
+  ====================================== -->
 
-      <div class="nom-statistique">
-        mots
-      </div>
-
-    </div>
-
-
-    <div class="statistique">
-
-      <div class="icone-statistique">
-        📖
-      </div>
-
-      <div
-        class="valeur-statistique"
-        id="stat-chapitres">
-        0
-      </div>
-
-      <div class="nom-statistique">
-        chapitres
-      </div>
-
-    </div>
-
-
-    <div class="statistique">
-
-      <div class="icone-statistique">
-        📄
-      </div>
-
-      <div
-        class="valeur-statistique"
-        id="stat-pages">
-        0
-      </div>
-
-      <div class="nom-statistique">
-        pages
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-    <!-- PERSONNAGES -->
-
-<section id="personnages">
-
-  <h2>👤 Personnages</h2>
-
-  <button id="ajouter-personnage">
-    + Ajouter un personnage
-  </button>
-
-  <!-- FORMULAIRE -->
-
-  <div id="formulaire-personnage">
-
-    <h3>Nouveau personnage</h3>
-
-    <label for="nom-personnage">Nom</label>
-    <input
-      type="text"
-      id="nom-personnage"
-      placeholder="Ex : Emma"
-    >
-
-    <label for="age-personnage">Âge</label>
-    <input
-      type="number"
-      id="age-personnage"
-      placeholder="Ex : 27"
-    >
-
-    <label for="genre-personnage">Genre</label>
-    <select id="genre-personnage">
-      <option value="">Non renseigné</option>
-      <option value="Femme">Femme</option>
-      <option value="Homme">Homme</option>
-      <option value="Non-binaire">Non-binaire</option>
-      <option value="Autre">Autre</option>
-    </select>
-
-    <label for="role-personnage">Rôle dans l'histoire</label>
-    <input
-      type="text"
-      id="role-personnage"
-      placeholder="Ex : Personnage principal"
-    >
-
-    <label for="apparence-personnage">Apparence</label>
-    <textarea
-      id="apparence-personnage"
-      placeholder="Cheveux, yeux, vêtements, signes particuliers..."
-    ></textarea>
-
-    <label for="personnalite-personnage">Personnalité</label>
-    <textarea
-      id="personnalite-personnage"
-      placeholder="Qualités, défauts, peurs, habitudes..."
-    ></textarea>
-
-    <label for="notes-personnage">Notes</label>
-    <textarea
-      id="notes-personnage"
-      placeholder="Secrets, passé, idées..."
-    ></textarea>
-
-    <div class="actions-formulaire">
-      <button id="enregistrer-personnage">
-        💾 Enregistrer
-      </button>
-
-      <button id="annuler-personnage">
-        Annuler
-      </button>
-    </div>
-
-  </div>
-
-
-<!-- LES PERSONNAGES APPARAÎTRONT ICI -->
-
-<div id="liste-personnages"></div>
-
-</section>
-
-
- <!-- RELATIONS -->
-
-<section id="relations">
-
-  <h2>🕸️ Relations</h2>
-
-  <button id="ajouter-relation">
-    + Ajouter une relation
-  </button>
-
-
-  <!-- FORMULAIRE RELATION -->
-
-  <div id="formulaire-relation">
-
-    <h3>Nouvelle relation</h3>
-
-    <label for="personnage-1">
-      Premier personnage
-    </label>
-
-    <select id="personnage-1"></select>
-
-
-    <label for="type-relation">
-      Type de relation
-    </label>
-
-    <select id="type-relation">
-
-      <option value="❤️ Amour">
-        ❤️ Amour
-      </option>
-
-      <option value="🤝 Amitié">
-        🤝 Amitié
-      </option>
-
-      <option value="👨‍👩‍👧 Famille">
-        👨‍👩‍👧 Famille
-      </option>
-
-      <option value="⚔️ Ennemi">
-        ⚔️ Ennemi
-      </option>
-
-      <option value="💼 Collègue">
-        💼 Collègue
-      </option>
-
-      <option value="❓ Autre">
-        ❓ Autre
-      </option>
-
-    </select>
-
-
-    <label for="personnage-2">
-      Deuxième personnage
-    </label>
-
-    <select id="personnage-2"></select>
-
-
-    <label for="description-relation">
-      Détails
-    </label>
-
-    <textarea
-      id="description-relation"
-      placeholder="Ex : amis d'enfance, relation secrète..."
-    ></textarea>
-
-
-    <div class="actions-formulaire">
-
-      <button id="enregistrer-relation">
-        💾 Enregistrer
-      </button>
-
-      <button id="annuler-relation">
-        Annuler
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- CARTE VISUELLE -->
-
-  <h3 class="titre-carte">
-    🕸️ Carte des relations
-  </h3>
-
-  <div id="carte-relations">
-
-    <svg id="lignes-relations"></svg>
-
-    <div id="bulles-personnages"></div>
-
-  </div>
-
-
-  <!-- RELATIONS ENREGISTRÉES -->
-
-  <h3>
-    📋 Relations enregistrées
-  </h3>
-
-  <div id="liste-relations"></div>
-
-</section>
-
- 
-<!-- CHRONOLOGIE -->
-
-<section id="chronologie">
-
-  <h2>🕐 Chronologie</h2>
-
-  <button id="ajouter-evenement">
-    + Ajouter un événement
-  </button>
-
-
-  <!-- FORMULAIRE ÉVÉNEMENT -->
-
-  <div id="formulaire-evenement">
-
-    <h3>Nouvel événement</h3>
-
-    <label for="titre-evenement">
-      Titre
-    </label>
-
-    <input
-      type="text"
-      id="titre-evenement"
-      placeholder="Ex : Rencontre entre Inaya et Lucas"
-    >
-
-
-    <label for="date-evenement">
-      Date ou période dans l'histoire
-    </label>
-
-    <input
-      type="text"
-      id="date-evenement"
-      placeholder="Ex : 15 juillet, Été, Jour 3..."
-    >
-
-
-    <label for="chapitre-evenement">
-      Chapitre
-    </label>
-
-    <input
-      type="text"
-      id="chapitre-evenement"
-      placeholder="Ex : Chapitre 7"
-    >
-
-
-    <label for="lieu-evenement">
-      Lieu
-    </label>
-
-    <input
-      type="text"
-      id="lieu-evenement"
-      placeholder="Ex : Maison de Lucas"
-    >
-
-
-    <label for="personnages-evenement">
-      Personnages concernés
-    </label>
-
-    <select>
-      id="personnages-evenement"
-      multiple
-    </select>
-
-    <small>
-      Maintiens Ctrl sur Windows ou Cmd sur Mac
-      pour sélectionner plusieurs personnages.
-    </small>
-
-
-    <label for="description-evenement">
-      Description
-    </label>
-
-    <textarea
-      id="description-evenement"
-      placeholder="Que se passe-t-il pendant cet événement ?"
-    ></textarea>
-
-
-    <div class="actions-formulaire">
-
-      <button id="enregistrer-evenement">
-        💾 Enregistrer
-      </button>
-
-      <button id="annuler-evenement">
-        Annuler
-      </button>
-
-    </div>
-
-  </div>
-
-
- <!-- FRISE CHRONOLOGIQUE -->
-
-<h3 class="titre-frise">
-  🕐 Frise chronologique
-</h3>
-
-<div id="frise-conteneur">
-  <div id="frise-evenements"></div>
-</div>
-
-
-<!-- ÉVÉNEMENTS ENREGISTRÉS -->
-
-<h3 class="titre-liste-evenements">
-  📋 Événements détaillés
-</h3>
-
-<div id="liste-evenements"></div>
-
-</section>
-
-
-</main>
-
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 
 </body>
 

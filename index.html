@@ -1192,7 +1192,12 @@ const UID_ADMIN = "n0TNfUAuBrVWx4JtNgtMsmBLZgt1";
 
 
 function appliquerModeVisiteur(estAdmin) {
-
+  
+document.body.classList.toggle(
+  "mode-visiteur",
+  !estAdmin
+);
+  
   const elementsModification =
     document.querySelectorAll(
       `

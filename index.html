@@ -9,7 +9,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Un été spécial - RomanBoard</title>
+  <title>Un été spécial - BookBoard</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -21,13 +21,31 @@
        EN-TÊTE
   ====================================== -->
 
-  <header>
+ <header>
 
-    <h1>Un été spécial</h1>
+  <h1>Un été spécial</h1>
 
-    <p>Mon espace d'écriture</p>
+  <p>Mon espace d'écriture</p>
 
-  </header>
+  <div id="zone-connexion">
+
+    <button id="connexion-google">
+      🔐 Se connecter avec Google
+    </button>
+
+    <div id="utilisateur-connecte" style="display: none;">
+
+      <span id="nom-utilisateur"></span>
+
+      <button id="deconnexion-google">
+        Se déconnecter
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
 
 
   <!-- =====================================
@@ -670,6 +688,177 @@
 
   <script src="script.js"></script>
 
-</body>
+<script src="script.js"></script>
 
+<script type="module">
+
+  import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+
+  import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+    onAuthStateChanged
+  }
+  from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+
+  // ========================================
+  // CONFIGURATION FIREBASE
+  // ========================================
+
+  const firebaseConfig = {
+
+    apiKey:
+      "AIzaSyCuCc9ndI_7N3VrNBpXGi8L7NFmCVQiFMU",
+
+    authDomain:
+      "bookboard-cd2fd.firebaseapp.com",
+
+    projectId:
+      "bookboard-cd2fd",
+
+    storageBucket:
+      "bookboard-cd2fd.firebasestorage.app",
+
+    messagingSenderId:
+      "266603127249",
+
+    appId:
+      "1:266603127249:web:63ac7dd638a7900bbe80f0"
+
+  };
+
+
+  // ========================================
+  // INITIALISATION
+  // ========================================
+
+  const app =
+    initializeApp(firebaseConfig);
+
+  const auth =
+    getAuth(app);
+
+  const provider =
+    new GoogleAuthProvider();
+
+
+  // ========================================
+  // ÉLÉMENTS HTML
+  // ========================================
+
+  const boutonConnexion =
+    document.getElementById(
+      "connexion-google"
+    );
+
+  const boutonDeconnexion =
+    document.getElementById(
+      "deconnexion-google"
+    );
+
+  const zoneUtilisateur =
+    document.getElementById(
+      "utilisateur-connecte"
+    );
+
+  const nomUtilisateur =
+    document.getElementById(
+      "nom-utilisateur"
+    );
+
+
+  // ========================================
+  // CONNEXION GOOGLE
+  // ========================================
+
+  boutonConnexion.addEventListener(
+    "click",
+    async function() {
+
+      try {
+
+        await signInWithPopup(
+          auth,
+          provider
+        );
+
+      } catch (erreur) {
+
+        console.error(
+          "Erreur de connexion :",
+          erreur
+        );
+
+        alert(
+          "La connexion Google n'a pas fonctionné."
+        );
+
+      }
+
+    }
+  );
+
+
+  // ========================================
+  // DÉCONNEXION
+  // ========================================
+
+  boutonDeconnexion.addEventListener(
+    "click",
+    async function() {
+
+      await signOut(auth);
+
+    }
+  );
+
+
+  // ========================================
+  // UTILISATEUR CONNECTÉ
+  // ========================================
+
+  onAuthStateChanged(
+    auth,
+    function(utilisateur) {
+
+      if (utilisateur) {
+
+        boutonConnexion.style.display =
+          "none";
+
+        zoneUtilisateur.style.display =
+          "block";
+
+        nomUtilisateur.textContent =
+          "🔐 " +
+          (
+            utilisateur.displayName ||
+            "Administrateur"
+          );
+
+        console.log(
+          "UID Firebase :",
+          utilisateur.uid
+        );
+
+      } else {
+
+        boutonConnexion.style.display =
+          "inline-block";
+
+        zoneUtilisateur.style.display =
+          "none";
+
+      }
+
+    }
+  );
+
+</script>
+
+</body>
 </html>

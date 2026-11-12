@@ -747,13 +747,13 @@
     from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
 
-    import {
-      getFirestore,
-      doc,
-      setDoc
-    }
-    from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-
+  import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
     // ========================================
     // CONFIGURATION FIREBASE
@@ -1053,7 +1053,138 @@
       }
     );
 
+// ========================================
+// CHARGER LES DONNÉES DEPUIS FIREBASE
+// ========================================
 
+async function chargerDonneesFirebase() {
+
+  try {
+
+    const reference =
+      doc(
+        db,
+        "romanboard",
+        "donnees"
+      );
+
+
+    const documentFirebase =
+      await getDoc(reference);
+
+
+    if (!documentFirebase.exists()) {
+
+      console.log(
+        "Aucune donnée BookBoard trouvée dans Firebase."
+      );
+
+      return;
+
+    }
+
+
+    const donnees =
+      documentFirebase.data();
+
+
+    // ========================================
+    // COPIE DANS LE NAVIGATEUR
+    // ========================================
+
+    localStorage.setItem(
+      "personnages",
+      JSON.stringify(
+        donnees.personnages || []
+      )
+    );
+
+
+    localStorage.setItem(
+      "relations",
+      JSON.stringify(
+        donnees.relations || []
+      )
+    );
+
+
+    localStorage.setItem(
+      "evenements",
+      JSON.stringify(
+        donnees.evenements || []
+      )
+    );
+
+
+    localStorage.setItem(
+      "reglagesRoman",
+      JSON.stringify(
+        donnees.reglages || {
+          totalDepart: 0,
+          objectif: 80000
+        }
+      )
+    );
+
+
+    localStorage.setItem(
+      "sessionsEcriture",
+      JSON.stringify(
+        donnees.sessions || []
+      )
+    );
+
+
+    // ========================================
+    // PREMIER CHARGEMENT
+    // ========================================
+
+    const versionFirebase =
+      donnees.derniereMiseAJour || "";
+
+    const versionLocale =
+      sessionStorage.getItem(
+        "versionFirebaseChargee"
+      );
+
+
+    if (
+      versionLocale !== versionFirebase
+    ) {
+
+      sessionStorage.setItem(
+        "versionFirebaseChargee",
+        versionFirebase
+      );
+
+
+      // Recharge BookBoard une seule fois
+      // pour afficher les données récupérées
+
+      window.location.reload();
+
+    }
+
+
+  } catch (erreur) {
+
+    console.error(
+      "Erreur pendant le chargement Firebase :",
+      erreur
+    );
+
+  }
+
+}
+
+
+// ========================================
+// CHARGEMENT PUBLIC
+// ========================================
+
+chargerDonneesFirebase();
+
+    
     // ========================================
     // ÉTAT DE CONNEXION
     // ========================================

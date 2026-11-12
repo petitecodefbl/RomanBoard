@@ -1184,52 +1184,121 @@ async function chargerDonneesFirebase() {
 
 chargerDonneesFirebase();
 
+    // ========================================
+// ADMINISTRATEUR
+// ========================================
+
+const UID_ADMIN = "n0TNfUAuBrVWx4JtNgtMsmBLZgt1";
+
+
+function appliquerModeVisiteur(estAdmin) {
+
+  const elementsModification =
+    document.querySelectorAll(
+      `
+      #enregistrer-reglages,
+      #ajouter-session,
+      #ajouter-personnage,
+      #ajouter-relation,
+      #ajouter-evenement,
+      .modifier-personnage,
+      .supprimer-personnage,
+      .supprimer-relation,
+      .modifier-evenement,
+      .supprimer-evenement,
+      .supprimer-session
+      `
+    );
+
+
+  elementsModification.forEach(function(element) {
+
+    element.style.display =
+      estAdmin ? "" : "none";
+
+  });
+
+
+  // Les réglages et formulaires du dashboard
+  // sont également réservés à l'administrateur
+
+  const configuration =
+    document.getElementById("configuration-roman");
+
+  const nouvelleSession =
+    document.getElementById("nouvelle-session");
+
+
+  if (configuration) {
+    configuration.style.display =
+      estAdmin ? "" : "none";
+  }
+
+
+  if (nouvelleSession) {
+    nouvelleSession.style.display =
+      estAdmin ? "" : "none";
+  }
+
+}
     
     // ========================================
     // ÉTAT DE CONNEXION
     // ========================================
 
-    onAuthStateChanged(
-      auth,
-      function(utilisateur) {
+   onAuthStateChanged(
+  auth,
+  function(utilisateur) {
 
-        if (utilisateur) {
-
-          boutonConnexion.style.display =
-            "none";
-
-
-          zoneUtilisateur.style.display =
-            "block";
+    const estAdmin =
+      utilisateur &&
+      utilisateur.uid === UID_ADMIN;
 
 
-          nomUtilisateur.textContent =
-            "🔐 " +
-            (
-              utilisateur.displayName ||
-              "Administrateur"
-            );
+    // ========================================
+    // ADMINISTRATEUR
+    // ========================================
+
+    if (estAdmin) {
+
+      boutonConnexion.style.display =
+        "none";
+
+      zoneUtilisateur.style.display =
+        "block";
+
+      nomUtilisateur.textContent =
+        "🔐 " +
+        (
+          utilisateur.displayName ||
+          "Administrateur"
+        );
 
 
-          console.log(
-            "UID Firebase :",
-            utilisateur.uid
-          );
+      appliquerModeVisiteur(true);
+
+    }
 
 
-        } else {
+    // ========================================
+    // VISITEUR
+    // ========================================
 
-          boutonConnexion.style.display =
-            "inline-block";
+    else {
+
+      boutonConnexion.style.display =
+        "inline-block";
+
+      zoneUtilisateur.style.display =
+        "none";
 
 
-          zoneUtilisateur.style.display =
-            "none";
+      appliquerModeVisiteur(false);
 
-        }
+    }
 
-      }
-    );
+  }
+);
 
 
   </script>

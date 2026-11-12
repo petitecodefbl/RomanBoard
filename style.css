@@ -1403,3 +1403,24 @@ section h2 {
   cursor: wait;
 }
 
+/* ========================================
+   MODE VISITEUR
+======================================== */
+
+body.mode-visiteur .modifier-personnage,
+body.mode-visiteur .supprimer-personnage,
+body.mode-visiteur .supprimer-relation,
+body.mode-visiteur .modifier-evenement,
+body.mode-visiteur .supprimer-evenement,
+body.mode-visiteur .supprimer-session,
+
+body.mode-visiteur #ajouter-personnage,
+body.mode-visiteur #ajouter-relation,
+body.mode-visiteur #ajouter-evenement,
+
+body.mode-visiteur #configuration-roman,
+body.mode-visiteur #nouvelle-session {
+
+  display: none !important;
+
+}

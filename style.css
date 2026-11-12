@@ -1329,3 +1329,44 @@ section h2 {
 
 }
 
+/* ========================================
+   CONNEXION GOOGLE
+======================================== */
+
+#zone-connexion {
+  margin-top: 18px;
+}
+
+
+#connexion-google,
+#deconnexion-google {
+  padding: 9px 14px;
+
+  border: 1px solid #555555;
+  border-radius: 8px;
+
+  background-color: white;
+  color: #252525;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+
+#connexion-google:hover,
+#deconnexion-google:hover {
+  transform: scale(1.03);
+}
+
+
+#utilisateur-connecte {
+  color: white;
+}
+
+
+#nom-utilisateur {
+  margin-right: 10px;
+
+  font-weight: bold;
+}

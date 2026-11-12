@@ -17,40 +17,53 @@
 
 <body>
 
-  <!-- =====================================
+  <!-- ========================================
        EN-TÊTE
-  ====================================== -->
+  ========================================= -->
 
- <header>
+  <header>
 
-  <h1>Un été spécial</h1>
+    <h1>Un été spécial</h1>
 
-  <p>Mon espace d'écriture</p>
+    <p>Mon espace d'écriture</p>
 
-  <div id="zone-connexion">
 
-    <button id="connexion-google">
-      🔐 Se connecter avec Google
-    </button>
+    <!-- CONNEXION GOOGLE -->
 
-    <div id="utilisateur-connecte" style="display: none;">
+    <div id="zone-connexion">
 
-      <span id="nom-utilisateur"></span>
-
-      <button id="deconnexion-google">
-        Se déconnecter
+      <button id="connexion-google">
+        🔐 Se connecter avec Google
       </button>
+
+
+      <div
+        id="utilisateur-connecte"
+        style="display: none;"
+      >
+
+        <span id="nom-utilisateur"></span>
+
+
+        <button id="envoyer-firebase">
+          ☁️ Envoyer mes données
+        </button>
+
+
+        <button id="deconnexion-google">
+          Se déconnecter
+        </button>
+
+      </div>
 
     </div>
 
-  </div>
-
-</header>
+  </header>
 
 
-  <!-- =====================================
+  <!-- ========================================
        MENU
-  ====================================== -->
+  ========================================= -->
 
   <nav>
 
@@ -76,225 +89,244 @@
   <main>
 
 
-    <!-- =====================================
+    <!-- ========================================
          TABLEAU DE BORD
-    ====================================== -->
+    ========================================= -->
 
-<section id="dashboard">
+    <section id="dashboard">
 
-  <h2>📊 Tableau de bord</h2>
-
-  <!-- PROGRESSION -->
-
-  <div class="bloc-progression">
-
-    <h3>Progression du roman</h3>
-
-    <div id="pourcentage-progression">
-      0 %
-    </div>
-
-    <div class="barre-progression">
-      <div id="remplissage-progression"></div>
-    </div>
-
-    <p id="texte-progression">
-      0 / 80 000 mots
-    </p>
-
-  </div>
+      <h2>📊 Tableau de bord</h2>
 
 
-  <!-- STATISTIQUES -->
+      <!-- PROGRESSION -->
 
-  <div class="statistiques-dashboard">
+      <div class="bloc-progression">
 
-    <div class="statistique">
+        <h3>Progression du roman</h3>
 
-      <div class="icone-statistique">✍️</div>
 
-      <div
-        class="valeur-statistique"
-        id="stat-mots"
-      >
-        0
+        <div id="pourcentage-progression">
+          0 %
+        </div>
+
+
+        <div class="barre-progression">
+
+          <div id="remplissage-progression"></div>
+
+        </div>
+
+
+        <p id="texte-progression">
+          0 / 80 000 mots
+        </p>
+
       </div>
 
-      <div class="nom-statistique">
-        mots
+
+      <!-- STATISTIQUES -->
+
+      <div class="statistiques-dashboard">
+
+
+        <div class="statistique">
+
+          <div class="icone-statistique">
+            ✍️
+          </div>
+
+          <div
+            class="valeur-statistique"
+            id="stat-mots"
+          >
+            0
+          </div>
+
+          <div class="nom-statistique">
+            mots
+          </div>
+
+        </div>
+
+
+        <div class="statistique">
+
+          <div class="icone-statistique">
+            📖
+          </div>
+
+          <div
+            class="valeur-statistique"
+            id="stat-chapitres"
+          >
+            0
+          </div>
+
+          <div class="nom-statistique">
+            chapitres
+          </div>
+
+        </div>
+
+
+        <div class="statistique">
+
+          <div class="icone-statistique">
+            📄
+          </div>
+
+          <div
+            class="valeur-statistique"
+            id="stat-pages"
+          >
+            0
+          </div>
+
+          <div class="nom-statistique">
+            pages
+          </div>
+
+        </div>
+
       </div>
 
-    </div>
+
+      <!-- ========================================
+           RÉGLAGES
+      ========================================= -->
+
+      <div id="configuration-roman">
+
+        <h3>⚙️ Réglages du roman</h3>
+
+        <p>
+          À remplir une première fois pour indiquer
+          où tu en es actuellement.
+        </p>
 
 
-    <div class="statistique">
+        <label for="total-depart">
+          Nombre de mots déjà écrits
+        </label>
 
-      <div class="icone-statistique">📖</div>
+        <input
+          type="number"
+          id="total-depart"
+          min="0"
+          placeholder="Ex : 2829"
+        >
 
-      <div
-        class="valeur-statistique"
-        id="stat-chapitres"
-      >
-        0
+
+        <label for="objectif-mots">
+          Objectif de mots
+        </label>
+
+        <input
+          type="number"
+          id="objectif-mots"
+          min="1"
+          placeholder="Ex : 80000"
+        >
+
+
+        <button id="enregistrer-reglages">
+          💾 Enregistrer les réglages
+        </button>
+
       </div>
 
-      <div class="nom-statistique">
-        chapitres
+
+      <!-- ========================================
+           SESSION D'ÉCRITURE
+      ========================================= -->
+
+      <div id="nouvelle-session">
+
+        <h3>✍️ Ajouter ma session d'écriture</h3>
+
+
+        <label for="mots-session">
+          Combien de mots as-tu écrits ?
+        </label>
+
+        <input
+          type="number"
+          id="mots-session"
+          min="0"
+          placeholder="Ex : 750"
+        >
+
+
+        <label for="pages-session">
+          Combien de pages as-tu maintenant ?
+        </label>
+
+        <input
+          type="number"
+          id="pages-session"
+          min="0"
+          placeholder="Ex : 152"
+        >
+
+
+        <label for="chapitres-session">
+          Combien de chapitres as-tu maintenant ?
+        </label>
+
+        <input
+          type="number"
+          id="chapitres-session"
+          min="0"
+          placeholder="Ex : 17"
+        >
+
+
+        <button id="ajouter-session">
+          + Ajouter la session
+        </button>
+
       </div>
 
-    </div>
 
+      <!-- AUJOURD'HUI -->
 
-    <div class="statistique">
+      <div id="resume-aujourdhui">
 
-      <div class="icone-statistique">📄</div>
+        <h3>☀️ Aujourd'hui</h3>
 
-      <div
-        class="valeur-statistique"
-        id="stat-pages"
-      >
-        0
+        <p>
+
+          <strong id="mots-aujourdhui">
+            +0 mots
+          </strong>
+
+        </p>
+
       </div>
 
-      <div class="nom-statistique">
-        pages
+
+      <!-- HISTORIQUE -->
+
+      <div id="historique-ecriture">
+
+        <h3>🗓️ Historique d'écriture</h3>
+
+        <div id="liste-sessions">
+
+          <p>
+            Aucune session enregistrée pour le moment.
+          </p>
+
+        </div>
+
       </div>
 
-    </div>
-
-  </div>
+    </section>
 
 
-  <!-- CONFIGURATION DE DÉPART -->
-
-  <div id="configuration-roman">
-
-    <h3>⚙️ Réglages du roman</h3>
-
-    <p>
-      À remplir une première fois pour indiquer
-      où tu en es actuellement.
-    </p>
-
-
-    <label for="total-depart">
-      Nombre de mots déjà écrits
-    </label>
-
-    <input
-      type="number"
-      id="total-depart"
-      min="0"
-      placeholder="Ex : 2829"
-    >
-
-
-    <label for="objectif-mots">
-      Objectif de mots
-    </label>
-
-    <input
-      type="number"
-      id="objectif-mots"
-      min="1"
-      placeholder="Ex : 80000"
-    >
-
-
-    <button id="enregistrer-reglages">
-      💾 Enregistrer les réglages
-    </button>
-
-  </div>
-
-
-  <!-- NOUVELLE SESSION -->
-
-  <div id="nouvelle-session">
-
-    <h3>✍️ Ajouter ma session d'écriture</h3>
-
-
-    <label for="mots-session">
-      Combien de mots as-tu écrits ?
-    </label>
-
-    <input
-      type="number"
-      id="mots-session"
-      min="0"
-      placeholder="Ex : 750"
-    >
-
-
-    <label for="pages-session">
-      Combien de pages as-tu maintenant ?
-    </label>
-
-    <input
-      type="number"
-      id="pages-session"
-      min="0"
-      placeholder="Ex : 14"
-    >
-
-
-    <label for="chapitres-session">
-      Combien de chapitres as-tu maintenant ?
-    </label>
-
-    <input
-      type="number"
-      id="chapitres-session"
-      min="0"
-      placeholder="Ex : 2"
-    >
-
-
-    <button id="ajouter-session">
-      + Ajouter la session
-    </button>
-
-  </div>
-
-
-  <!-- AUJOURD'HUI -->
-
-  <div id="resume-aujourdhui">
-
-    <h3>☀️ Aujourd'hui</h3>
-
-    <p>
-      <strong id="mots-aujourdhui">
-        +0 mots
-      </strong>
-    </p>
-
-  </div>
-
-
-  <!-- HISTORIQUE -->
-
-  <div id="historique-ecriture">
-
-    <h3>🗓️ Historique d'écriture</h3>
-
-    <div id="liste-sessions">
-
-      <p>
-        Aucune session enregistrée pour le moment.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-    <!-- =====================================
+    <!-- ========================================
          PERSONNAGES
-    ====================================== -->
+    ========================================= -->
 
     <section id="personnages">
 
@@ -306,7 +338,7 @@
       </button>
 
 
-      <!-- FORMULAIRE PERSONNAGE -->
+      <!-- FORMULAIRE -->
 
       <div id="formulaire-personnage">
 
@@ -420,16 +452,16 @@
       </div>
 
 
-      <!-- LISTE DES PERSONNAGES -->
+      <!-- LISTE -->
 
       <div id="liste-personnages"></div>
 
     </section>
 
 
-    <!-- =====================================
+    <!-- ========================================
          RELATIONS
-    ====================================== -->
+    ========================================= -->
 
     <section id="relations">
 
@@ -441,7 +473,7 @@
       </button>
 
 
-      <!-- FORMULAIRE RELATION -->
+      <!-- FORMULAIRE -->
 
       <div id="formulaire-relation">
 
@@ -520,7 +552,7 @@
       </div>
 
 
-      <!-- CARTE DES RELATIONS -->
+      <!-- CARTE -->
 
       <h3 class="titre-carte">
         🕸️ Carte des relations
@@ -547,9 +579,9 @@
     </section>
 
 
-    <!-- =====================================
+    <!-- ========================================
          CHRONOLOGIE
-    ====================================== -->
+    ========================================= -->
 
     <section id="chronologie">
 
@@ -561,7 +593,7 @@
       </button>
 
 
-      <!-- FORMULAIRE ÉVÉNEMENT -->
+      <!-- FORMULAIRE -->
 
       <div id="formulaire-evenement">
 
@@ -612,8 +644,6 @@
         >
 
 
-        <!-- PERSONNAGES CONCERNÉS -->
-
         <label for="personnages-evenement">
           Personnages concernés
         </label>
@@ -622,6 +652,7 @@
           id="personnages-evenement"
           multiple
         ></select>
+
 
         <small>
           Maintiens Ctrl sur Windows ou Cmd sur Mac
@@ -654,7 +685,7 @@
       </div>
 
 
-      <!-- FRISE CHRONOLOGIQUE -->
+      <!-- FRISE -->
 
       <h3 class="titre-frise">
         🕐 Frise chronologique
@@ -668,7 +699,7 @@
       </div>
 
 
-      <!-- ÉVÉNEMENTS DÉTAILLÉS -->
+      <!-- ÉVÉNEMENTS -->
 
       <h3 class="titre-liste-evenements">
         📋 Événements détaillés
@@ -682,183 +713,397 @@
   </main>
 
 
-  <!-- =====================================
-       JAVASCRIPT
-  ====================================== -->
+  <!-- ========================================
+       TON JAVASCRIPT ROMANBOARD
+  ========================================= -->
 
   <script src="script.js"></script>
 
-<script src="script.js"></script>
 
-<script type="module">
+  <!-- ========================================
+       FIREBASE
+  ========================================= -->
 
-  import { initializeApp }
-  from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-
-  import {
-    getAuth,
-    GoogleAuthProvider,
-    signInWithPopup,
-    signOut,
-    onAuthStateChanged
-  }
-  from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+  <script type="module">
 
 
-  // ========================================
-  // CONFIGURATION FIREBASE
-  // ========================================
+    // ========================================
+    // IMPORTS
+    // ========================================
 
-  const firebaseConfig = {
-
-    apiKey:
-      "AIzaSyCuCc9ndI_7N3VrNBpXGi8L7NFmCVQiFMU",
-
-    authDomain:
-      "bookboard-cd2fd.firebaseapp.com",
-
-    projectId:
-      "bookboard-cd2fd",
-
-    storageBucket:
-      "bookboard-cd2fd.firebasestorage.app",
-
-    messagingSenderId:
-      "266603127249",
-
-    appId:
-      "1:266603127249:web:63ac7dd638a7900bbe80f0"
-
-  };
-
-
-  // ========================================
-  // INITIALISATION
-  // ========================================
-
-  const app =
-    initializeApp(firebaseConfig);
-
-  const auth =
-    getAuth(app);
-
-  const provider =
-    new GoogleAuthProvider();
-
-
-  // ========================================
-  // ÉLÉMENTS HTML
-  // ========================================
-
-  const boutonConnexion =
-    document.getElementById(
-      "connexion-google"
-    );
-
-  const boutonDeconnexion =
-    document.getElementById(
-      "deconnexion-google"
-    );
-
-  const zoneUtilisateur =
-    document.getElementById(
-      "utilisateur-connecte"
-    );
-
-  const nomUtilisateur =
-    document.getElementById(
-      "nom-utilisateur"
-    );
-
-
-  // ========================================
-  // CONNEXION GOOGLE
-  // ========================================
-
-  boutonConnexion.addEventListener(
-    "click",
-    async function() {
-
-      try {
-
-        await signInWithPopup(
-          auth,
-          provider
-        );
-
-      } catch (erreur) {
-
-        console.error(
-          "Erreur de connexion :",
-          erreur
-        );
-
-        alert(
-          "La connexion Google n'a pas fonctionné."
-        );
-
-      }
-
+    import {
+      initializeApp
     }
-  );
+    from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 
 
-  // ========================================
-  // DÉCONNEXION
-  // ========================================
-
-  boutonDeconnexion.addEventListener(
-    "click",
-    async function() {
-
-      await signOut(auth);
-
+    import {
+      getAuth,
+      GoogleAuthProvider,
+      signInWithPopup,
+      signOut,
+      onAuthStateChanged
     }
-  );
+    from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
 
-  // ========================================
-  // UTILISATEUR CONNECTÉ
-  // ========================================
+    import {
+      getFirestore,
+      doc,
+      setDoc
+    }
+    from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-  onAuthStateChanged(
-    auth,
-    function(utilisateur) {
 
-      if (utilisateur) {
+    // ========================================
+    // CONFIGURATION FIREBASE
+    // ========================================
 
-        boutonConnexion.style.display =
-          "none";
+    const firebaseConfig = {
 
-        zoneUtilisateur.style.display =
-          "block";
+      apiKey:
+        "AIzaSyCuCc9ndI_7N3VrNBpXGi8L7NFmCVQiFMU",
 
-        nomUtilisateur.textContent =
-          "🔐 " +
-          (
-            utilisateur.displayName ||
-            "Administrateur"
+      authDomain:
+        "bookboard-cd2fd.firebaseapp.com",
+
+      projectId:
+        "bookboard-cd2fd",
+
+      storageBucket:
+        "bookboard-cd2fd.firebasestorage.app",
+
+      messagingSenderId:
+        "266603127249",
+
+      appId:
+        "1:266603127249:web:63ac7dd638a7900bbe80f0"
+
+    };
+
+
+    // ========================================
+    // INITIALISATION
+    // ========================================
+
+    const app =
+      initializeApp(firebaseConfig);
+
+
+    const auth =
+      getAuth(app);
+
+
+    const db =
+      getFirestore(app);
+
+
+    const provider =
+      new GoogleAuthProvider();
+
+
+    // ========================================
+    // ÉLÉMENTS HTML
+    // ========================================
+
+    const boutonConnexion =
+      document.getElementById(
+        "connexion-google"
+      );
+
+
+    const boutonDeconnexion =
+      document.getElementById(
+        "deconnexion-google"
+      );
+
+
+    const boutonEnvoyerFirebase =
+      document.getElementById(
+        "envoyer-firebase"
+      );
+
+
+    const zoneUtilisateur =
+      document.getElementById(
+        "utilisateur-connecte"
+      );
+
+
+    const nomUtilisateur =
+      document.getElementById(
+        "nom-utilisateur"
+      );
+
+
+    // ========================================
+    // CONNEXION GOOGLE
+    // ========================================
+
+    boutonConnexion.addEventListener(
+      "click",
+      async function() {
+
+        try {
+
+          await signInWithPopup(
+            auth,
+            provider
           );
 
-        console.log(
-          "UID Firebase :",
-          utilisateur.uid
-        );
+        } catch (erreur) {
 
-      } else {
+          console.error(
+            "Erreur de connexion :",
+            erreur
+          );
 
-        boutonConnexion.style.display =
-          "inline-block";
+          alert(
+            "La connexion Google n'a pas fonctionné."
+          );
 
-        zoneUtilisateur.style.display =
-          "none";
+        }
 
       }
+    );
 
-    }
-  );
 
-</script>
+    // ========================================
+    // DÉCONNEXION
+    // ========================================
+
+    boutonDeconnexion.addEventListener(
+      "click",
+      async function() {
+
+        try {
+
+          await signOut(auth);
+
+        } catch (erreur) {
+
+          console.error(
+            "Erreur de déconnexion :",
+            erreur
+          );
+
+        }
+
+      }
+    );
+
+
+    // ========================================
+    // ENVOYER LES DONNÉES VERS FIREBASE
+    // ========================================
+
+    boutonEnvoyerFirebase.addEventListener(
+      "click",
+      async function() {
+
+        const utilisateur =
+          auth.currentUser;
+
+
+        if (!utilisateur) {
+
+          alert(
+            "Connecte-toi avec Google avant d'envoyer les données."
+          );
+
+          return;
+
+        }
+
+
+        const confirmation =
+          confirm(
+            "Envoyer les données actuelles de BookBoard vers Firebase ?"
+          );
+
+
+        if (!confirmation) {
+          return;
+        }
+
+
+        try {
+
+          boutonEnvoyerFirebase.disabled =
+            true;
+
+          boutonEnvoyerFirebase.textContent =
+            "☁️ Envoi en cours...";
+
+
+          // ========================================
+          // RÉCUPÉRATION DES DONNÉES LOCALES
+          // ========================================
+
+          const personnagesCloud =
+            JSON.parse(
+              localStorage.getItem(
+                "personnages"
+              )
+            ) || [];
+
+
+          const relationsCloud =
+            JSON.parse(
+              localStorage.getItem(
+                "relations"
+              )
+            ) || [];
+
+
+          const evenementsCloud =
+            JSON.parse(
+              localStorage.getItem(
+                "evenements"
+              )
+            ) || [];
+
+
+          const reglagesCloud =
+            JSON.parse(
+              localStorage.getItem(
+                "reglagesRoman"
+              )
+            ) || {
+
+              totalDepart: 0,
+              objectif: 80000
+
+            };
+
+
+          const sessionsCloud =
+            JSON.parse(
+              localStorage.getItem(
+                "sessionsEcriture"
+              )
+            ) || [];
+
+
+          // ========================================
+          // ENVOI FIRESTORE
+          // ========================================
+
+          await setDoc(
+
+            doc(
+              db,
+              "romanboard",
+              "donnees"
+            ),
+
+            {
+
+              personnages:
+                personnagesCloud,
+
+              relations:
+                relationsCloud,
+
+              evenements:
+                evenementsCloud,
+
+              reglages:
+                reglagesCloud,
+
+              sessions:
+                sessionsCloud,
+
+              derniereMiseAJour:
+                new Date().toISOString()
+
+            }
+
+          );
+
+
+          alert(
+            "☁️ Les données de BookBoard ont bien été envoyées vers Firebase !"
+          );
+
+
+        } catch (erreur) {
+
+          console.error(
+            "Erreur Firebase :",
+            erreur
+          );
+
+
+          alert(
+            "L'envoi vers Firebase a échoué. Tes données locales sont toujours intactes."
+          );
+
+
+        } finally {
+
+          boutonEnvoyerFirebase.disabled =
+            false;
+
+          boutonEnvoyerFirebase.textContent =
+            "☁️ Envoyer mes données";
+
+        }
+
+      }
+    );
+
+
+    // ========================================
+    // ÉTAT DE CONNEXION
+    // ========================================
+
+    onAuthStateChanged(
+      auth,
+      function(utilisateur) {
+
+        if (utilisateur) {
+
+          boutonConnexion.style.display =
+            "none";
+
+
+          zoneUtilisateur.style.display =
+            "block";
+
+
+          nomUtilisateur.textContent =
+            "🔐 " +
+            (
+              utilisateur.displayName ||
+              "Administrateur"
+            );
+
+
+          console.log(
+            "UID Firebase :",
+            utilisateur.uid
+          );
+
+
+        } else {
+
+          boutonConnexion.style.display =
+            "inline-block";
+
+
+          zoneUtilisateur.style.display =
+            "none";
+
+        }
+
+      }
+    );
+
+
+  </script>
+
 
 </body>
+
 </html>
